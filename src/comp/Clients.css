@@ -1,0 +1,16 @@
+.dash.clients{
+    padding: 46px;
+}
+
+.register-client{
+    width: 153px;
+    height: 60px;
+    float: right;
+    position: absolute;
+    background: #DFA248;
+    top: 40px;
+    right: 60px;
+    border: none;
+    font-size: 24;
+    font-weight: 700;
+}

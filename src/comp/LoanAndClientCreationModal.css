@@ -1,0 +1,28 @@
+.modal-overlay{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,.56);
+    width: 100vw;
+    height: 100vh;
+}
+
+.modal-card{
+    background: whitesmoke;
+    position: absolute;
+    
+    top: 6%;
+    bottom: 6%;
+    left: 19%;
+    right: 19%;
+    border-radius: 30px;
+    padding: 51px 39px;
+    min-height: 500px;
+    max-height: 680px;
+    min-width: 420px;
+
+    overflow-y: auto;
+  
+}

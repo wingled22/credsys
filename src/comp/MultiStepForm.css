@@ -1,0 +1,21 @@
+.form-step{
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px;
+}
+
+button[type="submit"],button[type="button"]{
+    padding: 1em 2em;
+    background: #DFA248;
+    border: none;
+    font-size: 24;
+    font-weight: 700;
+}
+
+.container button{
+    margin-right: 1em;
+}
+
+.container button:last-child{
+    margin-right: 0;
+}

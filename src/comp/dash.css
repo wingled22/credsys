@@ -1,0 +1,10 @@
+.dash{
+    height: 100%;
+    width: 100%;
+    min-width: 400px;
+    background-color: whitesmoke;
+    border-radius: 30px;
+    display: inline-block;
+    position: relative;
+    padding: 1.5rem;
+}
