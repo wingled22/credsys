@@ -203,7 +203,7 @@ const MultiStepForm = ({ onStepClick, toggleModal }) => {
               </Row>
 
               <Row>
-                <Col md={6}>
+               <Col md={6}>
                   <FormGroup>
                     <Label>
                       Gender
@@ -214,13 +214,13 @@ const MultiStepForm = ({ onStepClick, toggleModal }) => {
                       type="select"
                       value={formData.gender}
                       onChange={handleInputChange}
-                      defaultValue={"default"}
                       required
-
                     >
-                      <option value="default" disabled  hidden>
-                        Select Gender
-                      </option>
+                      {formData.gender === "" && (
+                        <option value="" disabled hidden>
+                          Select Gender
+                        </option>
+                      )}
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
                     </Input>
@@ -254,7 +254,11 @@ const MultiStepForm = ({ onStepClick, toggleModal }) => {
                       onChange={handleProvinceChange}
                       required
                     >
-                      <option value="" disabled >Select Province</option>
+                      {formData.province === "" && (
+                        <option value="" disabled hidden>
+                          Select Province
+                        </option>
+                      )}
                       {provinces.map((province) => (
                         <option key={province.province_code} value={province.province_code}>
                           {province.province_name}
@@ -275,7 +279,11 @@ const MultiStepForm = ({ onStepClick, toggleModal }) => {
                       onChange={handleCityChange}
                       required
                     >
-                      <option value="" disabled>Select City</option>
+                      {formData.city === "" && (
+                        <option value="" disabled hidden>
+                          Select City
+                        </option>
+                      )}
                       {cities.map((city) => (
                         <option key={city.city_code} value={city.city_code}>
                           {city.city_name}
@@ -296,7 +304,11 @@ const MultiStepForm = ({ onStepClick, toggleModal }) => {
                       value={selectedBarangay}
                       onChange={handleBarangayChange}
                     >
-                      <option value="" disabled>Select Barangay</option>
+                      {formData.barangay === "" && (
+                        <option value="" disabled hidden>
+                          Select Barangay
+                        </option>
+                      )}
                       {barangays.map((barangay) => (
                         <option key={barangay.brgy_code} value={barangay.brgy_code}>
                           {barangay.brgy_name}
@@ -306,6 +318,7 @@ const MultiStepForm = ({ onStepClick, toggleModal }) => {
                   </FormGroup>
                 </Col>
               </Row> 
+
               <Row>
                 <Col md={12}>
                   <FormGroup>
