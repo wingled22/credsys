@@ -14,7 +14,7 @@ export default function LoanAndClientCreationModal({ isOpen, toggleModal}){
             {isOpen && (
                 <div onClick={toggleModal} className="modal-overlay">
                     <div className="modal-card">
-                        <MultiStepForm onStepClick={handleStepClick}/>
+                        <MultiStepForm onStepClick={handleStepClick} toggleModal={toggleModal}/>
 
                     </div>
                 </div>

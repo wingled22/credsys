@@ -5,7 +5,7 @@ import province from "./address/province.json"
 import city from "./address/city.json"
 import barangay from "./address/barangay.json"
 
-const MultiStepForm = ({ onStepClick }) => {
+const MultiStepForm = ({ onStepClick, toggleModal }) => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     fullName: '',
@@ -154,12 +154,12 @@ const MultiStepForm = ({ onStepClick }) => {
     console.log('Form submitted:', JSON.stringify(formData));
     try {
       // Make a POST request to your API endpoint
-      const response = await fetch('ClientRegistration/RegClientAndLoan', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5034/api/Custom/PostClient", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: {c : JSON.stringify(formData)},
+        body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
@@ -167,6 +167,7 @@ const MultiStepForm = ({ onStepClick }) => {
         throw new Error('Failed to submit the form');
       }
 
+      toggleModal();
       // Handle the successful response, e.g., show a success message
       console.log('Form submitted successfully!');
     } catch (error) {
