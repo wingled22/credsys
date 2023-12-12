@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import "./dash.css";
-import "./Clients.css"
+
 import { Button } from "reactstrap";
 import LoanAndClientCreationModal from "./LoanAndClientCreationModal.jsx";
+
+
+import "./Clients.css"
+import "./dash.css";
 
 export default function Clients() {
     const [modalOpen, setModalOpen] = useState(true);
