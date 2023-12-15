@@ -4,8 +4,8 @@ import { Col, Container, FormGroup, Row } from "reactstrap";
 
 import "./index.css"
 import { Routes, Route} from "react-router-dom";
-import Dash from "./comp/Dash";
-import Clients from "./comp/Clients";
+import Dash from "./pages/Dash";
+import Clients from "./pages/Clients";
 
 const App = () => {
     return (
