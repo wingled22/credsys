@@ -4,7 +4,7 @@
     padding: 10px;
 }
 
-button[type="submit"],button[type="button"]{
+button.reg[type="submit"], button.reg[type="button"]{
     padding: 1em 2em;
     background: #DFA248;
     border: none;

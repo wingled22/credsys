@@ -5,7 +5,7 @@ import province from "./address/province.json"
 import city from "./address/city.json"
 import barangay from "./address/barangay.json"
 
-const MultiStepForm = ({ onStepClick, toggleModal }) => {
+const MultiStepForm = ({ onStepClick, toggleModal, onFinish }) => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     fullName: '',
@@ -37,21 +37,18 @@ const MultiStepForm = ({ onStepClick, toggleModal }) => {
   const [selectedBarangay, setSelectedBarangay] = useState('');
 
   const [totalBringHome, setTotalBringHome] = useState(0);
+  const [interestedAmount, setInterestedAmount] = useState(0);
 
   
   const calculateTotalBringHome = () => {
     const { capital, interest, deductCBU, deductInsurance, deductOther } = formData;
 
-    // Calculate total deductions
     const totalDeductions = parseFloat(deductCBU) + parseFloat(deductInsurance) + parseFloat (deductOther);
-    // console.log("BH is : " + totalDeductions);
-
     const intrst = capital * (parseFloat(interest) / 100);
-    // console.log("intrest : " + intrst);
 
-    // Calculate total bring home cash
     const totalBringHome = (parseFloat(capital) - intrst) - totalDeductions;
     
+    setInterestedAmount(intrst);
     setTotalBringHome(totalBringHome);
   };
 
@@ -62,7 +59,6 @@ const MultiStepForm = ({ onStepClick, toggleModal }) => {
 
 
   useEffect(() => {
-    // Save the original lists when the component mounts
     setOriginalCities(city);
     setOriginalBarangays(barangay);
   }, []);
@@ -76,15 +72,9 @@ const MultiStepForm = ({ onStepClick, toggleModal }) => {
       province: selectedProvinceCode,
     }));
 
-    // Filter cities based on the selected province
     const filteredCities = originalCities.filter((city) => city.province_code === selectedProvinceCode);
     setCities(filteredCities);
     setSelectedCity('');
-    
-    // Filter barangays based on the selected city
-    // const filteredBarangays = originalBarangays.filter((barangay) => barangay.city_code === selectedCity);
-    // setBarangays(filteredBarangays);
-    // setSelectedBarangay('');
   };
 
   const handleCityChange = (event) => {
@@ -96,7 +86,6 @@ const MultiStepForm = ({ onStepClick, toggleModal }) => {
       city: selectedCityCode,
     }));
 
-    // Filter barangays based on the selected city
     const filteredBarangays = originalBarangays.filter((barangay) => barangay.city_code === selectedCityCode);
     setBarangays(filteredBarangays);
     setSelectedBarangay('');
@@ -138,13 +127,11 @@ const MultiStepForm = ({ onStepClick, toggleModal }) => {
 
   const nextStep = (e) => {
     e.preventDefault();
-    // setStep((prevStep) => prevStep + 1);
     setStep((prevStep) => Math.min(prevStep + 1, 3));
   };
 
   const prevStep = (e) => {
     e.preventDefault();
-    // setStep((prevStep) => prevStep - 1);
     setStep((prevStep) => Math.max(prevStep - 1, 1));
   };
 
@@ -167,7 +154,10 @@ const MultiStepForm = ({ onStepClick, toggleModal }) => {
         throw new Error('Failed to submit the form');
       }
 
+    
+
       toggleModal();
+      onFinish();
       // Handle the successful response, e.g., show a success message
       console.log('Form submitted successfully!');
     } catch (error) {
@@ -183,7 +173,7 @@ const MultiStepForm = ({ onStepClick, toggleModal }) => {
       case 1:
         return (
           <div className="form-step">
-            <h4>Step 1: Personal Information</h4>
+            <h4>Step 1: Personal Information </h4>
             <form onSubmit={nextStep}>
               <Row>
                 <Col md={12}>
@@ -375,7 +365,7 @@ const MultiStepForm = ({ onStepClick, toggleModal }) => {
               </Row>
 
               <Container className="text-center mt-4">
-                <button type="submit">Next</button> 
+                <button className='reg' type="submit">Next</button> 
               </Container>
             </form>
           </div>
@@ -498,6 +488,7 @@ const MultiStepForm = ({ onStepClick, toggleModal }) => {
                     <Input
                       disabled
                       type='number'
+                      value={interestedAmount}
                     />
                   </FormGroup>
                 </Col>
@@ -514,10 +505,10 @@ const MultiStepForm = ({ onStepClick, toggleModal }) => {
                 </Col>
               </Row>
               <Container className="text-center mt-4">
-                <button type="button" onClick={prevStep}>
+                <button className='reg' type="button" onClick={prevStep}>
                   Previous
                 </button>
-                <button type="submit">Submit</button>
+                <button className='reg' type="submit">Submit</button>
               </Container>
             </form>
           </div>
