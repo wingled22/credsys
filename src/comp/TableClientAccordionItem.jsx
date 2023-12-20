@@ -4,6 +4,7 @@ import { Button } from "reactstrap";
 import province from "./address/province.json";
 import city from "./address/city.json";
 import barangay from "./address/barangay.json";
+import TableClientAccordionItemDetail from "./TableClientAccordionItemDetail";
 
 const TableClientAccordionItem = ({ rowData }) => {
     const [expandedRow, setExpandedRow] = useState(false);
@@ -13,21 +14,13 @@ const TableClientAccordionItem = ({ rowData }) => {
     };
 
     const renderDetails = (rowData) => {
+        
         if (expandedRow) {
-            return (
-                <tr key={`details-${rowData.id}`} style={{ margin: 50 }}>
-                    <td colSpan="4">
-                        <div
-                            className="details-container"
-                            style={{ padding: 20 }}
-                        >
-                            Loan details for {rowData.id} {rowData.name}
-                        </div>
-                    </td>
-                </tr>
-            );
+            return <TableClientAccordionItemDetail {...rowData}/>
         }
         return null;
+
+
     };
 
     return (

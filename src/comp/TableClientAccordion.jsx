@@ -13,7 +13,7 @@ const TableClientAccordion = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5034/api/Custom/GetClients");
+        const response = await fetch("http://localhost:5034/api/client/GetClients");
         const data = await response.json();
         setClientData(data);
         setLoading(false);
