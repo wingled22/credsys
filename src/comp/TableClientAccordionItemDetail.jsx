@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Button, ButtonGroup, Table } from "reactstrap";
+import { Button, ButtonGroup, Modal, Table, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 
 const TableClientAccordionItemDetail = ({ id, name }) => {
@@ -7,6 +7,9 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
     const [loadingLoans, setLoadingLoans] = useState(true);
     const [schedules, setSchedules] = useState([]);
     const [loadingScheds, setLoadingScheds] = useState(true);
+
+    const [schedModalToggle, setSchedModalToggle] = useState(false);
+    const toggle = () => setSchedModalToggle(!schedModalToggle);
 
 
     const fetchData = async () => {
@@ -43,18 +46,56 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
         }
     }
 
+    const renderScheduleModal = () => {
+        return (
+            <Modal isOpen={schedModalToggle} toggle={toggle} {...args}>
+                <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+                <ModalBody>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Duis aute irure dolor in
+                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="primary" onClick={toggle}>
+                        Do Something
+                    </Button>{' '}
+                    <Button color="secondary" onClick={toggle}>
+                        Cancel
+                    </Button>
+                </ModalFooter>
+            </Modal>
+        )
+    }
 
     return (
-        <tr key={`details-${id}`} style={{ margin: 50 }}>
-            <td colSpan="4">
-                <div
-                    className="details-container"
-                    style={{ padding: 20 }}
-                >
-                    Loan Details
+        <>
+            <Modal isOpen={schedModalToggle} toggle={toggle} size="lg" centered >
+                <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+                <ModalBody>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Duis aute irure dolor in
+                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.
+                </ModalBody>
+                <ModalFooter></ModalFooter>
+            </Modal>
 
-                    {
-                        loadingLoans ? (
+            <tr key={`details-${id}`} style={{ margin: 50 }}>
+                <td colSpan="4">
+                    <div
+                        className="details-container"
+                        style={{ padding: 20 }}
+                    >
+                        Loan Details
+
+                        {loadingLoans ? (
                             <h1>loading</h1>
                         ) : (
                             <Table bordered striped size="sm">
@@ -71,45 +112,43 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {
-                                        loans.map((loanData) => {
-                                            return (
-                                                <tr key={`loanID-${loanData.id}`}>
-                                                    <td>{loanData.type}</td>
-                                                    <td>{loanData.loanAmount}</td>
-                                                    <td>{loanData.capital}</td>
-                                                    <td>{loanData.interest}</td>
-                                                    <td>{loanData.interestedAmount}</td>
-                                                    <td>{loanData.loanReceivable}</td>
-                                                    <td>{loanData.noPayment}</td>
-                                                    <td>
-                                                        <Button
-                                                            color="info"
-                                                            size="sm"
-                                                            //style={{marginRight: 10}}
-                                                            className="mx-1"
-                                                            
-                                                        >
-                                                            View Loan
-                                                        </Button>
-                                                        <Button
-                                                            color="success"
-                                                            size="sm"
-                                                        >
-                                                            View Loan
-                                                        </Button>
-                                                    </td>
-                                                </tr>
-                                            )
-                                        })
-                                    }
+                                    {loans.map((loanData) => {
+                                        return (
+                                            <tr key={`loanID-${loanData.id}`}>
+                                                <td>{loanData.type}</td>
+                                                <td>{loanData.loanAmount}</td>
+                                                <td>{loanData.capital}</td>
+                                                <td>{loanData.interest}</td>
+                                                <td>{loanData.interestedAmount}</td>
+                                                <td>{loanData.loanReceivable}</td>
+                                                <td>{loanData.noPayment}</td>
+                                                <td>
+                                                    <Button
+                                                        color="info"
+                                                        size="sm"
+                                                        //style={{marginRight: 10}}
+                                                        className="mx-1"
+                                                        onClick={() => toggle()}
+                                                    >
+                                                        View info
+                                                    </Button>
+                                                    <Button
+                                                        color="success"
+                                                        size="sm"
+                                                    >
+                                                        View info
+                                                    </Button>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
                                 </tbody>
                             </Table>
-                        )
-                    }
-                </div>
-            </td>
-        </tr>
+                        )}
+                    </div>
+                </td>
+            </tr>
+        </>
     )
 }
 
