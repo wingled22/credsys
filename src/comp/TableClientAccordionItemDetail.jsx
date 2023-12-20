@@ -115,12 +115,12 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                                                     >
                                                         View info
                                                     </Button>
-                                                    <Button
+                                                    {/* <Button
                                                         color="success"
                                                         size="sm"
                                                     >
                                                         View info
-                                                    </Button>
+                                                    </Button> */}
                                                 </td>
                                                 <LoanScheduleModal schedModalToggle={schedModalToggle} toggle={toggle} id={loanData.id} />
                                             </tr>
