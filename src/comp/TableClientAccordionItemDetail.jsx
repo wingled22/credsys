@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Button, ButtonGroup, Modal, Table, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import LoanScheduleModal from "./LoanScheduleModal";
 
 
 const TableClientAccordionItemDetail = ({ id, name }) => {
@@ -48,33 +49,14 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
 
     const renderScheduleModal = () => {
         return (
-            <Modal isOpen={schedModalToggle} toggle={toggle} {...args}>
-                <ModalHeader toggle={toggle}>Modal title</ModalHeader>
-                <ModalBody>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in
-                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
-                </ModalBody>
-                <ModalFooter>
-                    <Button color="primary" onClick={toggle}>
-                        Do Something
-                    </Button>{' '}
-                    <Button color="secondary" onClick={toggle}>
-                        Cancel
-                    </Button>
-                </ModalFooter>
-            </Modal>
+            <LoanScheduleModal schedModalToggle={schedModalToggle} toggle={toggle}/>
         )
     }
 
     return (
         <>
-            <Modal isOpen={schedModalToggle} toggle={toggle} size="lg" centered >
-                <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+            {/* <Modal isOpen={schedModalToggle} toggle={toggle} size="lg" centered >
+                <ModalHeader toggle={toggle}>Loan Schedules</ModalHeader>
                 <ModalBody>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
                     eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -85,7 +67,8 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                     culpa qui officia deserunt mollit anim id est laborum.
                 </ModalBody>
                 <ModalFooter></ModalFooter>
-            </Modal>
+            </Modal> */}
+
 
             <tr key={`details-${id}`} style={{ margin: 50 }}>
                 <td colSpan="4">
@@ -139,7 +122,11 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                                                         View info
                                                     </Button>
                                                 </td>
+                                                <LoanScheduleModal schedModalToggle={schedModalToggle} toggle={toggle} id={loanData.id} />
                                             </tr>
+                                            
+
+
                                         );
                                     })}
                                 </tbody>

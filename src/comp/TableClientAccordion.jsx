@@ -3,6 +3,7 @@ import { Button, Table } from "reactstrap";
 
 
 import TableClientAccordionItem from "./TableClientAccordionItem";
+import  "./TableClientAccordion.css";
 
 const TableClientAccordion = () => {
 
@@ -52,9 +53,9 @@ const TableClientAccordion = () => {
   };
 
   return (
-    <div style={{ padding: 20 }}>
+    <div className="overflow-auto client-table-container" style={{ margin: 20, height: 600}}>
       <Table size="sm" hover >
-        <thead>
+        <thead className="sticky-head">
           <tr>
             <th>Full Name</th>
             <th>Contact</th>

@@ -141,7 +141,7 @@ const MultiStepForm = ({ onStepClick, toggleModal, onFinish }) => {
     console.log('Form submitted:', JSON.stringify(formData));
     try {
       // Make a POST request to your API endpoint
-      const response = await fetch("http://localhost:5034/api/Custom/PostClient", {
+      const response = await fetch("http://localhost:5034/api/Client/PostClient", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
