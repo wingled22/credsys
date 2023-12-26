@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { Button, ButtonGroup, Modal, Table, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import LoanScheduleModal from "./LoanScheduleModal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faEye} from "@fortawesome/free-solid-svg-icons"
 
 
 const TableClientAccordionItemDetail = ({ id, name }) => {
@@ -113,7 +115,7 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                                                         className="mx-1"
                                                         onClick={() => toggle()}
                                                     >
-                                                        View info
+                                                        <FontAwesomeIcon icon={faEye} />
                                                     </Button>
                                                     {/* <Button
                                                         color="success"
