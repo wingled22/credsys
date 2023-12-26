@@ -25,7 +25,7 @@ const TableClientAccordion = () => {
     }
 
     fetchData();
-  }, []);
+  }, []);   
 
 
   const toggleDetails = (rowIndex) => {
@@ -53,7 +53,7 @@ const TableClientAccordion = () => {
   };
 
   return (
-    <div className="overflow-auto client-table-container" style={{ margin: 20, height: 600}}>
+    <div className="overflow-auto client-table-container" style={{ margin: 20, height:"90%" }}>
       <Table size="sm" hover >
         <thead className="sticky-head">
           <tr>
