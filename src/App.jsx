@@ -7,6 +7,7 @@ import { Routes, Route} from "react-router-dom";
 import Dash from "./pages/Dash";
 import Clients from "./pages/Clients";
 import Payment from "./pages/Payment";
+import ClientLoans from "./comp/payment/ClientLoans";
 
 const App = () => {
     return (
@@ -17,6 +18,8 @@ const App = () => {
                     <Route path="/" element={<Dash/>}/>
                     <Route path="/clients" element={<Clients/>}/>
                     <Route path="/payment" element={<Payment/>}/>
+                    <Route path="/payment/clientloans/:clientId" element={<ClientLoans/>}/>
+
                 </Routes>
                 
             </div>
