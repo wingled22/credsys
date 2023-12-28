@@ -5,6 +5,7 @@ import { Button, Table } from "reactstrap";
 import TableClientAccordionItem from "./TableClientAccordionItem";
 import  "./TableClientAccordion.css";
 
+//TODO: add update client info
 const TableClientAccordion = () => {
 
   const [loading, setLoading] = useState(true);
