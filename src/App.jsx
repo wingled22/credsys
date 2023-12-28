@@ -6,6 +6,7 @@ import "./index.css"
 import { Routes, Route} from "react-router-dom";
 import Dash from "./pages/Dash";
 import Clients from "./pages/Clients";
+import Payment from "./pages/Payment";
 
 const App = () => {
     return (
@@ -15,6 +16,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<Dash/>}/>
                     <Route path="/clients" element={<Clients/>}/>
+                    <Route path="/payment" element={<Payment/>}/>
                 </Routes>
                 
             </div>
