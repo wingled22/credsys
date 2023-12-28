@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Col, FormGroup, Input, Label, Row,Container} from "reactstrap"
+import { Col, FormGroup, Input, Label, Row, Container } from "reactstrap"
 import "./MultiStepForm.css"
 import province from "./address/province.json"
 import city from "./address/city.json"
@@ -16,7 +16,7 @@ const MultiStepForm = ({ onStepClick, toggleModal, onFinish }) => {
     barangay: '',
     additionalAddressInfo: '',
     email: '',
-    contactNumber: 0 ,
+    contactNumber: 0,
     loanType: '',
     capital: 0,
     interest: 0,
@@ -39,15 +39,15 @@ const MultiStepForm = ({ onStepClick, toggleModal, onFinish }) => {
   const [totalBringHome, setTotalBringHome] = useState(0);
   const [interestedAmount, setInterestedAmount] = useState(0);
 
-  
+
   const calculateTotalBringHome = () => {
     const { capital, interest, deductCBU, deductInsurance, deductOther } = formData;
 
-    const totalDeductions = parseFloat(deductCBU) + parseFloat(deductInsurance) + parseFloat (deductOther);
+    const totalDeductions = parseFloat(deductCBU) + parseFloat(deductInsurance) + parseFloat(deductOther);
     const intrst = capital * (parseFloat(interest) / 100);
 
     const totalBringHome = (parseFloat(capital) - intrst) - totalDeductions;
-    
+
     setInterestedAmount(intrst);
     setTotalBringHome(totalBringHome);
   };
@@ -150,21 +150,16 @@ const MultiStepForm = ({ onStepClick, toggleModal, onFinish }) => {
       });
 
       if (!response.ok) {
-        // Handle error if the response status is not ok
         throw new Error('Failed to submit the form');
       }
 
-    
-
       toggleModal();
-      onFinish();
-      // Handle the successful response, e.g., show a success message
+      // onFinish();
       console.log('Form submitted successfully!');
     } catch (error) {
-      // Handle any errors that occurred during the fetch
       console.error('Error submitting form:', error.message);
     }
-  
+
 
   };
 
@@ -179,21 +174,21 @@ const MultiStepForm = ({ onStepClick, toggleModal, onFinish }) => {
                 <Col md={12}>
                   <FormGroup>
                     <Label>Full Name</Label>
-                    <Input 
-                       id="fullName"
-                       name="fullName"
-                       value={formData.fullName}
-                       onChange={handleInputChange}
-                       required
-                       placeholder="Enter full name ..."
-                       type="text"
+                    <Input
+                      id="fullName"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="Enter full name ..."
+                      type="text"
                     />
                   </FormGroup>
                 </Col>
               </Row>
 
               <Row>
-               <Col md={6}>
+                <Col md={6}>
                   <FormGroup>
                     <Label>
                       Gender
@@ -220,13 +215,13 @@ const MultiStepForm = ({ onStepClick, toggleModal, onFinish }) => {
                 <Col md={6}>
                   <FormGroup>
                     <Label>Birth date</Label>
-                    <Input 
-                       id="birthDate"
-                       name="birthDate"
-                       type="date"
-                       value={formData.birthDate}
-                       onChange={handleInputChange}
-                       required
+                    <Input
+                      id="birthDate"
+                      name="birthDate"
+                      type="date"
+                      value={formData.birthDate}
+                      onChange={handleInputChange}
+                      required
                     />
                   </FormGroup>
                 </Col>
@@ -307,24 +302,24 @@ const MultiStepForm = ({ onStepClick, toggleModal, onFinish }) => {
                     </Input>
                   </FormGroup>
                 </Col>
-              </Row> 
+              </Row>
 
               <Row>
                 <Col md={12}>
                   <FormGroup>
                     <Label>
-                        Address
+                      Address
                     </Label>
                     <Input
-                       id="Purok"
-                       name="additionalAddressInfo"
-                       placeholder="Address additional information"
-                       type="text"
-                       value={formData.additionalAddressInfo}
+                      id="Purok"
+                      name="additionalAddressInfo"
+                      placeholder="Address additional information"
+                      type="text"
+                      value={formData.additionalAddressInfo}
                       onChange={handleInputChange}
                       required
                     />
-                    
+
                   </FormGroup>
                 </Col>
               </Row>
@@ -332,47 +327,47 @@ const MultiStepForm = ({ onStepClick, toggleModal, onFinish }) => {
                 <Col md={6}>
                   <FormGroup>
                     <Label>
-                        Email
+                      Email
                     </Label>
                     <Input
-                       id="email"
-                       name="email"
-                       placeholder="email"
-                       type="email"
-                       value={formData.email}
+                      id="email"
+                      name="email"
+                      placeholder="email"
+                      type="email"
+                      value={formData.email}
                       onChange={handleInputChange}
                     />
-                    
+
                   </FormGroup>
                 </Col>
 
                 <Col md={6}>
                   <FormGroup>
                     <Label>
-                        Contact
+                      Contact
                     </Label>
                     <Input
-                       id="contactNumber"
-                       name="contactNumber"
-                       placeholder="Contact number"
-                       type="number"
-                       value={formData.contactNumber}
+                      id="contactNumber"
+                      name="contactNumber"
+                      placeholder="Contact number"
+                      type="number"
+                      value={formData.contactNumber}
                       onChange={handleInputChange}
                     />
-                    
+
                   </FormGroup>
                 </Col>
               </Row>
 
               <Container className="text-center mt-4">
-                <button className='reg' type="submit">Next</button> 
+                <button className='reg' type="submit">Next</button>
               </Container>
             </form>
           </div>
         );
       case 2:
         return (
-          <div  className="form-step">
+          <div className="form-step">
             <h4>Step 2: Loan Information</h4>
             <form onSubmit={handleSubmit}>
               <Row>
@@ -383,12 +378,14 @@ const MultiStepForm = ({ onStepClick, toggleModal, onFinish }) => {
                     </Label>
                     <Input
                       type='select'
-                      required
+                      id='loanType'
                       name='loanType'
                       defaultValue={'default'}
                       onChange={handleInputChange}
+                      required
+                    
                     >
-                      <option value="default" disabled  hidden>
+                      <option value="default" disabled hidden>
                         Select Loan Type
                       </option>
                       <option value="Daily">Daily</option>
@@ -405,6 +402,7 @@ const MultiStepForm = ({ onStepClick, toggleModal, onFinish }) => {
                     <Input
                       required
                       type='number'
+                      id='capital'
                       name='capital'
                       value={formData.capital}
                       onChange={handleInputChange}
@@ -432,6 +430,7 @@ const MultiStepForm = ({ onStepClick, toggleModal, onFinish }) => {
                     <Input
                       required
                       type='number'
+                      id='noOfPayments'
                       name='noOfPayments'
                       value={formData.noOfPayments}
                       onChange={handleInputChange}
@@ -447,6 +446,7 @@ const MultiStepForm = ({ onStepClick, toggleModal, onFinish }) => {
                     <Input
                       required
                       type='number'
+                      id='deductCBU'
                       name='deductCBU'
                       value={formData.deductCBU}
                       onChange={handleInputChange}

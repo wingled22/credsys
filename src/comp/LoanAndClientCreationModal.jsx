@@ -28,7 +28,7 @@ export default function LoanAndClientCreationModal({ isOpen, toggleModal }) {
                 <ModalBody>
                         <MultiStepForm onStepClick={handleStepClick} toggleModal={toggleModal} onFinish={handleFormFinish} />
                 </ModalBody>
-                <ModalFooter></ModalFooter>
+                {/* <ModalFooter></ModalFooter> */}
             </Modal>
         </>
     );
