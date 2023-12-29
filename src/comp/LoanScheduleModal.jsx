@@ -10,9 +10,7 @@ const LoanScheduleModal = ({ schedModalToggle, toggle, id }) => {
         try {
             const response = await fetch("http://localhost:5034/api/Schedule/GetSchedulesByLoanId?id=" + id);
             const data = await response.json();
-            // setLoans((prevLoans) =>{
-            //     return [...prevLoans, data]
-            // });
+           
             setSchedules(data)
             setLoadingScheds(false);
         } catch (error) {
@@ -21,7 +19,7 @@ const LoanScheduleModal = ({ schedModalToggle, toggle, id }) => {
         }
     }
 
-    console.table(schedules);
+    // console.table(schedules);
 
     useEffect(() => {
         getLoanSchedule();
@@ -52,6 +50,7 @@ const LoanScheduleModal = ({ schedModalToggle, toggle, id }) => {
                                         <td>{item.collectables}</td>
                                         <td>{item.date}</td>
                                         <td>{item.status}</td>
+                                        
                                     </tr>
                                 ))}
                             </tbody>

@@ -5,18 +5,31 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons"
 
 import LoanScheduleModal from "../LoanScheduleModal";
+import LoanSchedulePaymentModal from "./LoanSchedulePaymentModal.jsx";
 
 
 
 const ClientLoans = ({ match }) => {
   const { clientId } = useParams();
   const [loans, setLoans] = useState([]);
+  const [clientInfo, setClientInfo] = useState({});
   const [loadingLoans, setLoadingLoans] = useState(true);
   const [schedModalToggle, setSchedModalToggle] = useState(false);
   const toggle = () => setSchedModalToggle(!schedModalToggle);
 
+  const fetchClientInfoData = async () => {
+    try {
+      const response = await fetch("http://localhost:5034/api/client/GetClientById?id=" + clientId);
+      const data = await response.json();
 
-  const fetchData = async () => {
+      setClientInfo(data);
+
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
+
+  const fetchClientLoansData = async () => {
     try {
       const response = await fetch("http://localhost:5034/api/client/GetClientLoans?id=" + clientId);
       const data = await response.json();
@@ -30,7 +43,8 @@ const ClientLoans = ({ match }) => {
   }
 
   useEffect(() => {
-    fetchData();
+    fetchClientInfoData();
+    fetchClientLoansData();
   }, [])
 
   return (
@@ -41,7 +55,7 @@ const ClientLoans = ({ match }) => {
       padding: 30
     }}>
       <h2>Client Loans</h2>
-      <p>Name: {clientId} </p>
+      <p>Name: {clientInfo.name} </p>
       <Link to={"/payment"}>back to payment</Link>
 
       {loadingLoans ? (
@@ -83,7 +97,7 @@ const ClientLoans = ({ match }) => {
                     </Button>
 
                   </td>
-                  <LoanScheduleModal schedModalToggle={schedModalToggle} toggle={toggle} id={loanData.id} />
+                  <LoanSchedulePaymentModal schedModalToggle={schedModalToggle} toggle={toggle} id={loanData.id} />
                 </tr>
 
 
