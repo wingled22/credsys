@@ -1,7 +1,7 @@
 import React from "react"
 import { Outlet, Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUser, faCog, faSignOutAlt, faMoneyBill, faFileInvoice, faMoneyBill1, faMoneyBill1Wave } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUser, faCog, faSignOutAlt, faMoneyBill, faFileInvoice, faMoneyBill1, faMoneyBill1Wave, faCashRegister, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 import "./Sidebar.css"
 
@@ -20,11 +20,11 @@ export default function Sidebar() {
                 </NavLink>
 
                 <NavLink className="nav-item" to={"/clients"} activeclassname="active">
-                    <FontAwesomeIcon icon={faUser} size="2x" />
+                    <FontAwesomeIcon icon={faUsers} size="2x" />
                 </NavLink>
 
                 <NavLink className="nav-item" to={"/payment"} activeclassname="active">
-                    <FontAwesomeIcon icon={faMoneyBill1Wave} size="2x" />
+                    <FontAwesomeIcon icon={faCashRegister} size="2x" />
                 </NavLink>
 
                 {/* 

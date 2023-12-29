@@ -8,6 +8,7 @@ import Dash from "./pages/Dash";
 import Clients from "./pages/Clients";
 import Payment from "./pages/Payment";
 import ClientLoans from "./comp/payment/ClientLoans";
+import PaymentRegister from "./comp/payment/PaymentRegister.jsx";
 
 const App = () => {
     return (
@@ -19,6 +20,7 @@ const App = () => {
                     <Route path="/clients" element={<Clients/>}/>
                     <Route path="/payment" element={<Payment/>}/>
                     <Route path="/payment/clientloans/:clientId" element={<ClientLoans/>}/>
+                    <Route path="/payment/paymentregister/:scheduleId" element={<PaymentRegister/>}/>
 
                 </Routes>
                 
