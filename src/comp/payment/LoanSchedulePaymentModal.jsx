@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react"
 import { Button, ButtonGroup, Modal, Table, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faEye, faMoneyBill1Wave, faMoneyBillTransfer, faMoneyCheck } from "@fortawesome/free-solid-svg-icons"
+import { Link } from "react-router-dom";
 
-const LoanSchedulePaymentModal = ({ schedModalToggle, toggle, id }) => {
+const LoanSchedulePaymentModal = ({ schedModalToggle, toggle, id, clientId }) => {
 
     const [schedules, setSchedules] = useState([]);
     const [loadingScheds, setLoadingScheds] = useState(true);
@@ -54,7 +55,7 @@ const LoanSchedulePaymentModal = ({ schedModalToggle, toggle, id }) => {
                                         {/* <td>{item.status}</td> */}
                                         <td>
                                             {
-                                                item.status.toLowerCase() == "paid" ?  (
+                                                item.status.toLowerCase() == "paid" ? (
                                                     <Button
                                                         color="success"
                                                         size="sm"
@@ -64,15 +65,17 @@ const LoanSchedulePaymentModal = ({ schedModalToggle, toggle, id }) => {
                                                         <FontAwesomeIcon icon={faCheck} style={{ color: "whitesmoke" }} />
                                                     </Button>
                                                 ) : (
-                                                    <Button
-                                                        // color="warning"
-                                                        size="sm"
-                                                        style={{background : "#DFA248"}}
-                                                        className="mx-1"
-                                                    >
-                                                        <FontAwesomeIcon icon={faMoneyBill1Wave} style={{ color: "whitesmoke" }} />
-                                                    </Button>
-                                                )  
+                                                    <Link to={`/payment/paymentregister/${clientId}/${item.id}`}>
+                                                        <Button
+                                                            // color="warning"
+                                                            size="sm"
+                                                            style={{ background: "#DFA248" }}
+                                                            className="mx-1"
+                                                        >
+                                                            <FontAwesomeIcon icon={faMoneyBill1Wave} style={{ color: "whitesmoke" }} />
+                                                        </Button>
+                                                    </Link>
+                                                )
                                             }
                                         </td>
                                     </tr>

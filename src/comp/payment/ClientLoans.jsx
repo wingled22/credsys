@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Col, Table, Button } from 'reactstrap';
+import { Col, Table, Button, Row, Container } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons"
+import { faEnvelope, faEye, faMailBulk, faPerson, faPhone, faUser, faVoicemail } from "@fortawesome/free-solid-svg-icons"
 
 import LoanScheduleModal from "../LoanScheduleModal";
 import LoanSchedulePaymentModal from "./LoanSchedulePaymentModal.jsx";
@@ -48,66 +48,90 @@ const ClientLoans = ({ match }) => {
   }, [])
 
   return (
-    <Col style={{
-      background: "whitesmoke",
-      minWidth: 400,
-      borderRadius: 30,
-      padding: 30
+    <Container className='container-fluid' style={{
+      // background: "whitesmoke",
+      // minWidth: 400,
+      // borderRadius: 30,
+      padding: 30,
+      boxSizing: "border-box"
     }}>
-      <h2>Client Loans</h2>
-      <p>Name: {clientInfo.name} </p>
-      <Link to={"/payment"}>back to payment</Link>
+      {/* <Link to={"/payment"}>back to payment</Link> */}
 
-      {loadingLoans ? (
-        <h1>loading</h1>
-      ) : (
-        <Table bordered striped size="sm">
-          <thead>
-            <tr>
-              <th>Type</th>
-              <th>Total Payable</th>
-              <th>Capital</th>
-              <th>Interest</th>
-              <th>Interest Amount</th>
-              <th>Loan Receivable</th>
-              <th>No Payment</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {loans.map((loanData) => {
-              return (
-                <tr key={`loanID-${loanData.id}`}>
-                  <td>{loanData.type}</td>
-                  <td>{loanData.loanAmount}</td>
-                  <td>{loanData.capital}</td>
-                  <td>{loanData.interest}</td>
-                  <td>{loanData.interestedAmount}</td>
-                  <td>{loanData.loanReceivable}</td>
-                  <td>{loanData.noPayment}</td>
-                  <td>
-                    <Button
-                      color="info"
-                      size="sm"
-                      //style={{marginRight: 10}}
-                      className="mx-1"
-                      onClick={() => toggle()}
-                    >
-                      <FontAwesomeIcon icon={faEye} />
-                    </Button>
+      <Row className='d-flex justify-content-between'>
+        <Col style={{
+          background: "whitesmoke",
+          borderRadius: 30,
+          padding: 30,
+          marginRight:10,
+          marginBottom:10,
 
-                  </td>
-                  <LoanSchedulePaymentModal schedModalToggle={schedModalToggle} toggle={toggle} id={loanData.id} />
+        }} >
+
+          <h4> <FontAwesomeIcon icon={faUser}/> : {clientInfo.name}</h4>
+          <p> <FontAwesomeIcon icon={faEnvelope}/> : {clientInfo.email} </p>
+          <p> <FontAwesomeIcon icon={faPhone}/> : {clientInfo.contactNumber} </p>
+
+
+        </Col> 
+        <Col style={{
+          background: "whitesmoke",
+          borderRadius: 30,
+          padding: 30,
+
+        }}  >
+          <h5>Loan Information</h5>
+          {loadingLoans ? (
+            <h1>loading</h1>
+          ) : (
+            <Table bordered responsive striped size="sm">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Total Payable</th>
+                  <th>Capital</th>
+                  <th>Interest</th>
+                  <th>Interest Amount</th>
+                  <th>Loan Receivable</th>
+                  <th>No Payment</th>
+                  <th>Actions</th>
                 </tr>
+              </thead>
+              <tbody>
+                {loans.map((loanData) => {
+                  return (
+                    <tr key={`loanID-${loanData.id}`}>
+                      <td>{loanData.type}</td>
+                      <td>{loanData.loanAmount}</td>
+                      <td>{loanData.capital}</td>
+                      <td>{loanData.interest}</td>
+                      <td>{loanData.interestedAmount}</td>
+                      <td>{loanData.loanReceivable}</td>
+                      <td>{loanData.noPayment}</td>
+                      <td>
+                        <Button
+                          color="info"
+                          size="sm"
+                          //style={{marginRight: 10}}
+                          className="mx-1"
+                          onClick={() => toggle()}
+                        >
+                          <FontAwesomeIcon icon={faEye} />
+                        </Button>
+
+                      </td>
+                      <LoanSchedulePaymentModal schedModalToggle={schedModalToggle} toggle={toggle} id={loanData.id} clientId={clientInfo.id} />
+                    </tr>
 
 
 
-              );
-            })}
-          </tbody>
-        </Table>
-      )}
-    </Col>
+                  );
+                })}
+              </tbody>
+            </Table>
+          )}
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
