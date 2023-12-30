@@ -9,16 +9,26 @@ import { faEnvelope, faPhone, faUser } from "@fortawesome/free-solid-svg-icons";
 const PaymentRegister = () => {
 
     const { clientId, scheduleId } = useParams();
-    const [loans, setLoans] = useState([]);
     const [clientInfo, setClientInfo] = useState({});
+    const [schedInfo, setSchedInfo] = useState({});
+    const [amount, setAmount] = useState(null);
+    const [balance, setBalance] = useState(null);
 
     const fetchClientInfoData = async () => {
         try {
             const response = await fetch("http://localhost:5034/api/client/GetClientById?id=" + clientId);
             const data = await response.json();
-
             setClientInfo(data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    }
 
+    const fetchSchedInfoData = async () => {
+        try {
+            const response = await fetch("http://localhost:5034/api/schedule/GetScheduleById?id=" + scheduleId);
+            const data = await response.json();
+            setSchedInfo(data);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -26,23 +36,24 @@ const PaymentRegister = () => {
 
     useEffect(() => {
         fetchClientInfoData();
+        fetchSchedInfoData();
     }, []);
 
     const submitHandler = (e) => {
         e.preventDefault();
     }
 
+    const amountChange = (e) => {
+        setAmount(e.target.value);
+    }
     return (
         <Container className='container-fluid' style={{
-            // background: "whitesmoke",
-            // minWidth: 400,
-            // borderRadius: 30,
             padding: 30,
             boxSizing: "border-box"
         }}>
             {/* <Link to={"/payment"}>back to payment</Link> */}
 
-            <Row className='d-flex justify-content-between' style={{alignItems: "flex-start",rowGap:10, columnGap: 10}}>
+            <Row className='d-flex justify-content-between' style={{ alignItems: "flex-start" }}>
                 <Col style={{
                     background: "whitesmoke",
                     borderRadius: 30,
@@ -68,48 +79,79 @@ const PaymentRegister = () => {
                 }}  >
                     <h5>Payment Processing</h5>
                     <br />
-                    <div className="d-flex flex-wrap justify-content-around">
-                        <div style={{
-                            background: "#DFA248",
-                            height: 150,
-                            width: 150,
-                            padding: 10,
-                            borderRadius: 10
-                        }}>
-                            <center style={{ color: "whitesmoke" }}>
-                                Payable
+                    {
+                        schedInfo.id == 0 || schedInfo.id == null ? (
+                            <h5>Schedule already paid</h5>
+                        ) : (
+                            <>
+                                <div className="d-flex flex-wrap justify-content-around">
+                                    <div style={{
+                                        background: "#DFA248",
+                                        height: 150,
+                                        width: 150,
+                                        padding: 10,
+                                        borderRadius: 10,
+                                        gap: 30,
+                                    }}>
+                                        <center style={{ color: "whitesmoke" }}>
+                                            Payable
 
-                            </center>
-                        </div>
+                                            <h1 style={{
+                                                marginTop: 25,
+                                                color: "white",
+                                                textShadow: '2px 2px 4px #00000059',
+                                            }}>{schedInfo.collectables}</h1>
+                                        </center>
+                                    </div>
 
-                        <div style={{
-                            background: "#DFA248",
-                            height: 150,
-                            width: 150,
-                            padding: 10,
-                            borderRadius: 10
-                        }}>
-                            <center style={{ color: "whitesmoke" }}>
-                                Remaining
+                                    <div style={{
+                                        background: "#7F4343",
+                                        height: 150,
+                                        width: 150,
+                                        padding: 10,
+                                        borderRadius: 10
+                                    }}>
+                                        <center style={{ color: "whitesmoke" }}>
+                                            Remaining
+                                            {
+                                                amount == null || amount == 0 || amount == undefined ? (
+                                                    <h1 style={{
+                                                        marginTop: 25,
+                                                        color: "white",
+                                                        textShadow: '2px 2px 4px #00000059',
+                                                    }}>{schedInfo.collectables}</h1>
+                                                ) : (
+                                                    <h1 style={{
+                                                        marginTop: 25,
+                                                        color: "white",
+                                                        textShadow: '2px 2px 4px #00000059',
+                                                    }}>{schedInfo.collectables - amount}</h1>
+                                                )
+                                            }
+                                        </center>
 
-                            </center>
-                        </div>
-                        <br />
+                                    </div>
 
-                    </div>
-                    <br />
-                    <Form onSubmit={submitHandler}>
-                        <FormGroup>
-                            <Label>Amount to pay</Label>
-                            <Input 
-                                type="number"
-                                required
-                            ></Input>
-                        </FormGroup>
-                        <FormGroup>
-                            <Button type="submit">Submit Payment</Button>
-                        </FormGroup>
-                    </Form>
+                                </div>
+                                <br />
+                                <Form onSubmit={submitHandler}>
+                                    <FormGroup>
+                                        <Label>Amount to pay</Label>
+                                        <Input
+                                            type="number"
+                                            onChange={amountChange}
+                                            required
+                                        ></Input>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Button type="submit">Submit Payment</Button>
+                                    </FormGroup>
+                                </Form>
+                            </>
+                        )
+                    }
+
+
                 </Col>
             </Row>
         </Container>
