@@ -64,6 +64,15 @@ const LoanSchedulePaymentModal = ({ schedModalToggle, toggle, id, clientId }) =>
                                                     >
                                                         <FontAwesomeIcon icon={faCheck} style={{ color: "whitesmoke" }} />
                                                     </Button>
+                                                ) : item.status.toLowerCase() === "partial" ? (
+                                                    // Handle "partial" status
+                                                    <Button
+                                                        // Add styles or other attributes as needed
+                                                        size="sm"
+                                                        className="mx-1"
+                                                    >
+                                                        Partial
+                                                    </Button>
                                                 ) : (
                                                     <Link to={`/payment/paymentregister/${clientId}/${item.id}`}>
                                                         <Button

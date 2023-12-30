@@ -2,6 +2,7 @@ import React from "react";
 import Sidebar from "./comp/Sidebar";
 import { Col, Container, FormGroup, Row } from "reactstrap";
 
+import 'toastr/build/toastr.min.css';
 import "./index.css"
 import { Routes, Route} from "react-router-dom";
 import Dash from "./pages/Dash";

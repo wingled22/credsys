@@ -1,8 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, FormGroup, Input, Label, Row } from "reactstrap";
 import { faEnvelope, faPhone, faUser } from "@fortawesome/free-solid-svg-icons";
+import toastr from "toastr";
 
 
 
@@ -11,8 +12,10 @@ const PaymentRegister = () => {
     const { clientId, scheduleId } = useParams();
     const [clientInfo, setClientInfo] = useState({});
     const [schedInfo, setSchedInfo] = useState({});
-    const [amount, setAmount] = useState(null);
+    const [paidAmount, setAmount] = useState(null);
     const [balance, setBalance] = useState(null);
+
+    const navigate = useNavigate();
 
     const fetchClientInfoData = async () => {
         try {
@@ -34,17 +37,75 @@ const PaymentRegister = () => {
         }
     }
 
+    const showNegativeInputToastr = () => {
+        toastr.error('Cannot accept input; negative value was provided.', 'Incorrect input.');
+    };
+
+    const showSucessPaymentProcess = () => {
+        toastr.success("Processing payment successfully", "Success");
+        setTimeout(() => {
+            navigate(-1);
+        }, 1000)
+    };
+
+    const showErrorPaymentProcess = () => {
+        toastr.error('Error on processing the payment contact the developers.', 'Error');
+    };
+
+
     useEffect(() => {
         fetchClientInfoData();
         fetchSchedInfoData();
     }, []);
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
+
+        const formData = {
+            schedId: scheduleId,
+            amount: paidAmount,
+        }
+
+
+        console.log("form submitted:", JSON.stringify(formData));
+
+        try {
+            const response = await fetch(
+                "http://localhost:5034/api/Payment/PostPayment",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(formData)
+                });
+
+            if (!response.ok) {
+                throw new Error('Failed to submit the form');
+            }
+
+            const res = await response.json();
+
+            if (res.status == "Ok") {
+                showSucessPaymentProcess();
+            }
+
+
+            if (res.status == "Error") {
+                showErrorPaymentProcess();
+            }
+
+
+        } catch (error) {
+            console.error('Error submitting form:', error.message);
+        }
     }
 
     const amountChange = (e) => {
-        setAmount(e.target.value);
+        if (e.target.value < 0) {
+            showNegativeInputToastr();
+        } else {
+            setAmount(e.target.value);
+
+        }
     }
     return (
         <Container className='container-fluid' style={{
@@ -114,7 +175,7 @@ const PaymentRegister = () => {
                                         <center style={{ color: "whitesmoke" }}>
                                             Remaining
                                             {
-                                                amount == null || amount == 0 || amount == undefined ? (
+                                                paidAmount == null || paidAmount == 0 || paidAmount == undefined ? (
                                                     <h1 style={{
                                                         marginTop: 25,
                                                         color: "white",
@@ -125,7 +186,7 @@ const PaymentRegister = () => {
                                                         marginTop: 25,
                                                         color: "white",
                                                         textShadow: '2px 2px 4px #00000059',
-                                                    }}>{schedInfo.collectables - amount}</h1>
+                                                    }}>{schedInfo.collectables - paidAmount}</h1>
                                                 )
                                             }
                                         </center>
@@ -144,7 +205,14 @@ const PaymentRegister = () => {
                                         ></Input>
                                     </FormGroup>
                                     <FormGroup>
-                                        <Button type="submit">Submit Payment</Button>
+                                        {
+                                            paidAmount == null || paidAmount == 0 || paidAmount == undefined ? (
+                                                <Button disabled type="submit" style={{ background: "#dfa248" }} >Submit Payment</Button>
+                                            ) : (
+                                                <Button type="submit" style={{ background: "#dfa248" }} >Submit Payment</Button>
+                                            )
+
+                                        }
                                     </FormGroup>
                                 </Form>
                             </>
