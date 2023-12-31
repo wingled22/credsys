@@ -48,7 +48,7 @@ const LoanScheduleModal = ({ schedModalToggle, toggle, id }) => {
                                     <tr key={item.id}>
                                         <td>{item.id}</td>
                                         <td>{item.collectables}</td>
-                                        <td>{item.date}</td>
+                                        <td>{new Date(item.date).toLocaleDateString()}</td>
                                         <td>{item.status}</td>
                                         
                                     </tr>

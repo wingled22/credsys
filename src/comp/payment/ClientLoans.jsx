@@ -64,6 +64,8 @@ const ClientLoans = ({ match }) => {
           padding: 30,
           marginRight:10,
           marginBottom:10,
+          maxWidth:300
+
 
         }} >
 
@@ -91,8 +93,8 @@ const ClientLoans = ({ match }) => {
                   <th>Capital</th>
                   <th>Interest</th>
                   <th>Interest Amount</th>
-                  <th>Loan Receivable</th>
-                  <th>No Payment</th>
+                  <th>Collectables</th>
+                  <th>Collected</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -105,8 +107,8 @@ const ClientLoans = ({ match }) => {
                       <td>{loanData.capital}</td>
                       <td>{loanData.interest}</td>
                       <td>{loanData.interestedAmount}</td>
-                      <td>{loanData.loanReceivable}</td>
-                      <td>{loanData.noPayment}</td>
+                      <td>{loanData.loanAmount - loanData.collected}</td>
+                      <td>{loanData.collected}</td>
                       <td>
                         <Button
                           color="info"

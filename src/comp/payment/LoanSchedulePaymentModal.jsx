@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Button, ButtonGroup, Modal, Table, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faEye, faMoneyBill1Wave, faMoneyBillTransfer, faMoneyCheck } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faCircleHalfStroke, faClose, faEye, faMoneyBill1Wave, faMoneyBillTransfer, faMoneyCheck } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "react-router-dom";
 
 const LoanSchedulePaymentModal = ({ schedModalToggle, toggle, id, clientId }) => {
@@ -44,6 +44,7 @@ const LoanSchedulePaymentModal = ({ schedModalToggle, toggle, id, clientId }) =>
                                     <th>Collectables</th>
                                     <th>Date</th>
                                     <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,8 +52,18 @@ const LoanSchedulePaymentModal = ({ schedModalToggle, toggle, id, clientId }) =>
                                     <tr key={item.id}>
                                         <td>{item.id}</td>
                                         <td>{item.collectables}</td>
-                                        <td>{item.date}</td>
-                                        {/* <td>{item.status}</td> */}
+                                        <td>{new Date(item.date).toLocaleDateString()}</td>
+                                        <td>
+                                            {
+                                                item.status.toLowerCase() == "paid" ? (
+                                                    <FontAwesomeIcon icon={faCheck} className="text-success" />
+                                                ) : item.status.toLowerCase() === "partial" ? (
+                                                    <FontAwesomeIcon icon={faCircleHalfStroke} className="text-warning" />
+                                                ) : (
+                                                    <FontAwesomeIcon icon={faClose} className="text-danger" />
+                                                )
+                                            }
+                                        </td>
                                         <td>
                                             {
                                                 item.status.toLowerCase() == "paid" ? (
@@ -64,16 +75,18 @@ const LoanSchedulePaymentModal = ({ schedModalToggle, toggle, id, clientId }) =>
                                                     >
                                                         <FontAwesomeIcon icon={faCheck} style={{ color: "whitesmoke" }} />
                                                     </Button>
-                                                ) : item.status.toLowerCase() === "partial" ? (
-                                                    // Handle "partial" status
-                                                    <Button
-                                                        // Add styles or other attributes as needed
-                                                        size="sm"
-                                                        className="mx-1"
-                                                    >
-                                                        Partial
-                                                    </Button>
-                                                ) : (
+                                                ) : 
+                                                // item.status.toLowerCase() === "partial" ? (
+                                                //     // Handle "partial" status
+                                                //     <Button
+                                                //         // Add styles or other attributes as needed
+                                                //         size="sm"
+                                                //         className="mx-1"
+                                                //     >
+                                                //         Partial
+                                                //     </Button>
+                                                // ) :
+                                                (
                                                     <Link to={`/payment/paymentregister/${clientId}/${item.id}`}>
                                                         <Button
                                                             // color="warning"
