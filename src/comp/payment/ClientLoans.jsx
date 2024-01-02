@@ -15,6 +15,9 @@ const ClientLoans = ({ match }) => {
   const [clientInfo, setClientInfo] = useState({});
   const [loadingLoans, setLoadingLoans] = useState(true);
   const [schedModalToggle, setSchedModalToggle] = useState(false);
+  
+  
+  
   const toggle = () => setSchedModalToggle(!schedModalToggle);
 
   const fetchClientInfoData = async () => {

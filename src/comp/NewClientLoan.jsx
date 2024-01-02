@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Modal, ModalHeader, ModalBody, Container, Form, Input, Row, Col, FormGroup, Label } from "reactstrap";
+import toastr from "toastr";
 
 
 const NewClientLoan = ({ modal, toggle, clientId,onLoanSubmitted }) => {
@@ -56,7 +57,9 @@ const NewClientLoan = ({ modal, toggle, clientId,onLoanSubmitted }) => {
             });
 
             if (!response.ok) {
+                toastr.error("Something unexpected happen when adding loan.", "Unsuccessful on adding loan")
                 throw new Error('Failed to submit the form');
+
             }
 
             const responseData = await response.json();
@@ -69,6 +72,7 @@ const NewClientLoan = ({ modal, toggle, clientId,onLoanSubmitted }) => {
 
             // Close the modal
             toggle();
+            toastr.success("Successfully added the new loan","Success")
         } catch (error) {
             console.error('Error submitting form:', error.message);
         }

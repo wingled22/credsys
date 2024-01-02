@@ -74,11 +74,11 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
         }
     }
 
-    const renderScheduleModal = () => {
-        return (
-            <LoanScheduleModal schedModalToggle={schedModalToggle} toggle={toggle} />
-        )
-    }
+    // const renderScheduleModal = () => {
+    //     return (
+    //         <LoanScheduleModal schedModalToggle={schedModalToggle} toggle={toggle} />
+    //     )
+    // }
 
 
 
