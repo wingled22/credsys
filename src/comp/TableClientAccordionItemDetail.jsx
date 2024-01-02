@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react"
 import { Button, ButtonGroup, Modal, Table, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import LoanScheduleModal from "./LoanScheduleModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faEye} from "@fortawesome/free-solid-svg-icons"
+import { faEye } from "@fortawesome/free-solid-svg-icons"
+import NewClientLoan from "./NewClientLoan";
 
 
 const TableClientAccordionItemDetail = ({ id, name }) => {
@@ -10,9 +11,16 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
     const [loadingLoans, setLoadingLoans] = useState(true);
     const [schedules, setSchedules] = useState([]);
     const [loadingScheds, setLoadingScheds] = useState(true);
-
     const [schedModalToggle, setSchedModalToggle] = useState(false);
+    const [newClientLoanModalIsOpen, setNewClientLoanModalIsOpen] = useState(false);
+
+    const toggleCreateNewLoanModal = () => setNewClientLoanModalIsOpen(!newClientLoanModalIsOpen);
+
+    const renderNewLoanModal = () => {
+        return <NewClientLoan modal={newClientLoanModalIsOpen} toggle={toggleCreateNewLoanModal} clientId={id} onLoanSubmitted={onLoanSubmitted} />;
+    }
     const toggle = () => setSchedModalToggle(!schedModalToggle);
+
 
 
     const fetchData = async () => {
@@ -29,6 +37,23 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
             setLoadingLoans(false);
         }
     }
+
+    const fetchAndSetLoans = async () => {
+        try {
+            const response = await fetch(`http://localhost:5034/api/client/GetClientLoans?id=${id}`);
+            const data = await response.json();
+            setLoans(data);
+            setLoadingLoans(false);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            setLoadingLoans(false);
+        }
+    };
+
+    const onLoanSubmitted = () => {
+        fetchAndSetLoans();
+    };
+
 
     useEffect(() => {
         fetchData();
@@ -51,27 +76,14 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
 
     const renderScheduleModal = () => {
         return (
-            <LoanScheduleModal schedModalToggle={schedModalToggle} toggle={toggle}/>
+            <LoanScheduleModal schedModalToggle={schedModalToggle} toggle={toggle} />
         )
     }
 
+
+
     return (
         <>
-            {/* <Modal isOpen={schedModalToggle} toggle={toggle} size="lg" centered >
-                <ModalHeader toggle={toggle}>Loan Schedules</ModalHeader>
-                <ModalBody>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in
-                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
-                </ModalBody>
-                <ModalFooter></ModalFooter>
-            </Modal> */}
-
-
             <tr key={`details-${id}`} style={{ margin: 50 }}>
                 <td colSpan="4">
                     <div
@@ -79,6 +91,17 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                         style={{ padding: 20 }}
                     >
                         Loan Details
+                        <br />
+                        <Button
+                            size="sm"
+                            className="mt-1 mb-2"
+                            onClick={() => toggleCreateNewLoanModal(onLoanSubmitted)}
+                            style={{ background: "#DFA248", color: "whitesmoke", border: "none" }}
+                        >
+                            Add Loan
+                        </Button>
+
+                        {renderNewLoanModal()}
 
                         {loadingLoans ? (
                             <h1>loading</h1>
@@ -87,12 +110,15 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                                 <thead>
                                     <tr>
                                         <th>Type</th>
-                                        <th>Total Payable</th>
-                                        <th>Capital</th>
+                                        {/* <th>Capital</th>
                                         <th>Interest</th>
                                         <th>Interest Amount</th>
-                                        <th>Loan Receivable</th>
+                                        <th>Loan Receivable</th> */}
                                         <th>No Payment</th>
+                                        <th>Total Payable</th>
+                                        <th>Collected</th>
+                                        <th>Collectables</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -101,12 +127,16 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                                         return (
                                             <tr key={`loanID-${loanData.id}`}>
                                                 <td>{loanData.type}</td>
-                                                <td>{loanData.loanAmount}</td>
-                                                <td>{loanData.capital}</td>
+                                                {/* <td>{loanData.capital}</td>
                                                 <td>{loanData.interest}</td>
                                                 <td>{loanData.interestedAmount}</td>
-                                                <td>{loanData.loanReceivable}</td>
+                                                <td>{loanData.loanReceivable}</td> */}
                                                 <td>{loanData.noPayment}</td>
+                                                <td>{loanData.loanAmount}</td>
+                                                <td>{loanData.collected}</td>
+                                                <td>{loanData.loanAmount - loanData.collected}</td>
+                                                <td>{loanData.status}</td>
+
                                                 <td>
                                                     <Button
                                                         color="info"
@@ -126,7 +156,7 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                                                 </td>
                                                 <LoanScheduleModal schedModalToggle={schedModalToggle} toggle={toggle} id={loanData.id} />
                                             </tr>
-                                            
+
 
 
                                         );

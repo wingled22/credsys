@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "reactstrap";
+import { Button, Container, Form, Modal, ModalBody, ModalHeader } from "reactstrap";
 
 import province from "./address/province.json";
 import city from "./address/city.json";
@@ -8,20 +8,21 @@ import TableClientAccordionItemDetail from "./TableClientAccordionItemDetail";
 
 const TableClientAccordionItem = ({ rowData }) => {
     const [expandedRow, setExpandedRow] = useState(false);
-
     const toggleDetails = () => {
         setExpandedRow(!expandedRow);
     };
 
     const renderDetails = (rowData) => {
-        
+
         if (expandedRow) {
-            return <TableClientAccordionItemDetail {...rowData}/>
+            return <TableClientAccordionItemDetail {...rowData} />
         }
         return null;
 
 
     };
+
+    
 
     return (
         <React.Fragment>

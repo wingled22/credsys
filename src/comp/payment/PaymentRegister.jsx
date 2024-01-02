@@ -227,5 +227,3 @@ const PaymentRegister = () => {
 }
 
 export default PaymentRegister;
-
-//TODO: process payment and calculate patment
