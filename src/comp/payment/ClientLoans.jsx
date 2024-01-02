@@ -15,10 +15,15 @@ const ClientLoans = ({ match }) => {
   const [clientInfo, setClientInfo] = useState({});
   const [loadingLoans, setLoadingLoans] = useState(true);
   const [schedModalToggle, setSchedModalToggle] = useState(false);
-  
-  
-  
+  const [selectedLoan, setSelectedLoan] = useState(null);
+
+
+
   const toggle = () => setSchedModalToggle(!schedModalToggle);
+
+  const renderLoanSchedPaymentModal = (loanId, clientId) => {
+    return <LoanSchedulePaymentModal schedModalToggle={schedModalToggle} toggle={toggle} id={loanId} clientId={clientId} />
+  }
 
   const fetchClientInfoData = async () => {
     try {
@@ -65,19 +70,19 @@ const ClientLoans = ({ match }) => {
           background: "whitesmoke",
           borderRadius: 30,
           padding: 30,
-          marginRight:10,
-          marginBottom:10,
-          maxWidth:300
+          marginRight: 10,
+          marginBottom: 10,
+          maxWidth: 300
 
 
         }} >
 
-          <h4> <FontAwesomeIcon icon={faUser}/> : {clientInfo.name}</h4>
-          <p> <FontAwesomeIcon icon={faEnvelope}/> : {clientInfo.email} </p>
-          <p> <FontAwesomeIcon icon={faPhone}/> : {clientInfo.contactNumber} </p>
+          <h4> <FontAwesomeIcon icon={faUser} /> : {clientInfo.name}</h4>
+          <p> <FontAwesomeIcon icon={faEnvelope} /> : {clientInfo.email} </p>
+          <p> <FontAwesomeIcon icon={faPhone} /> : {clientInfo.contactNumber} </p>
 
 
-        </Col> 
+        </Col>
         <Col style={{
           background: "whitesmoke",
           borderRadius: 30,
@@ -118,13 +123,25 @@ const ClientLoans = ({ match }) => {
                           size="sm"
                           //style={{marginRight: 10}}
                           className="mx-1"
-                          onClick={() => toggle()}
+                          onClick={() => {
+                            setSelectedLoan(loanData.id);
+                            toggle();
+                          }}
                         >
                           <FontAwesomeIcon icon={faEye} />
                         </Button>
 
                       </td>
-                      <LoanSchedulePaymentModal schedModalToggle={schedModalToggle} toggle={toggle} id={loanData.id} clientId={clientInfo.id} />
+                      {/* <LoanSchedulePaymentModal schedModalToggle={schedModalToggle} toggle={toggle} id={loanData.id} clientId={clientInfo.id} /> */}
+                      {/* {renderLoanSchedPaymentModal(loanData.id, clientInfo.id)} */}
+                      {selectedLoan && (
+                        <LoanSchedulePaymentModal
+                          schedModalToggle={schedModalToggle}
+                          toggle={toggle}
+                          id={selectedLoan}
+                          clientId={clientInfo.id}
+                        />
+                      )}
                     </tr>
 
 
