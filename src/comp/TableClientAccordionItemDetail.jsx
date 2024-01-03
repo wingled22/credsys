@@ -14,6 +14,9 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
     const [schedModalToggle, setSchedModalToggle] = useState(false);
     const [newClientLoanModalIsOpen, setNewClientLoanModalIsOpen] = useState(false);
 
+    const [selectedLoan, setSelectedLoan] = useState(null);
+
+
     const toggleCreateNewLoanModal = () => setNewClientLoanModalIsOpen(!newClientLoanModalIsOpen);
 
     const renderNewLoanModal = () => {
@@ -109,7 +112,10 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                             <Table bordered striped size="sm">
                                 <thead>
                                     <tr>
+                                        <th>id</th>
+
                                         <th>Type</th>
+
                                         {/* <th>Capital</th>
                                         <th>Interest</th>
                                         <th>Interest Amount</th>
@@ -126,6 +132,7 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                                     {loans.map((loanData) => {
                                         return (
                                             <tr key={`loanID-${loanData.id}`}>
+                                                <td>{loanData.id}</td>
                                                 <td>{loanData.type}</td>
                                                 {/* <td>{loanData.capital}</td>
                                                 <td>{loanData.interest}</td>
@@ -143,7 +150,10 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                                                         size="sm"
                                                         //style={{marginRight: 10}}
                                                         className="mx-1"
-                                                        onClick={() => toggle()}
+                                                        onClick={() => {
+                                                            setSelectedLoan(loanData.id);
+                                                            toggle();
+                                                        }}
                                                     >
                                                         <FontAwesomeIcon icon={faEye} />
                                                     </Button>
@@ -154,7 +164,11 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                                                         View info
                                                     </Button> */}
                                                 </td>
-                                                <LoanScheduleModal schedModalToggle={schedModalToggle} toggle={toggle} id={loanData.id} />
+                                                <LoanScheduleModal
+                                                    schedModalToggle={schedModalToggle}
+                                                    toggle={toggle}
+                                                    id={loanData.id}
+                                                />
                                             </tr>
 
 

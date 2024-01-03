@@ -96,6 +96,7 @@ const ClientLoans = ({ match }) => {
             <Table bordered responsive striped size="sm">
               <thead>
                 <tr>
+                  <th>ID</th>
                   <th>Type</th>
                   <th>Total Payable</th>
                   <th>Capital</th>
@@ -110,6 +111,7 @@ const ClientLoans = ({ match }) => {
                 {loans.map((loanData) => {
                   return (
                     <tr key={`loanID-${loanData.id}`}>
+                      <td>{loanData.id}</td>
                       <td>{loanData.type}</td>
                       <td>{loanData.loanAmount}</td>
                       <td>{loanData.capital}</td>
@@ -123,17 +125,17 @@ const ClientLoans = ({ match }) => {
                           size="sm"
                           //style={{marginRight: 10}}
                           className="mx-1"
-                          onClick={() => {
+                          onClick={(e, row) => {
                             setSelectedLoan(loanData.id);
                             toggle();
+                            console.log(e.row);
                           }}
                         >
                           <FontAwesomeIcon icon={faEye} />
                         </Button>
 
                       </td>
-                      {/* <LoanSchedulePaymentModal schedModalToggle={schedModalToggle} toggle={toggle} id={loanData.id} clientId={clientInfo.id} /> */}
-                      {/* {renderLoanSchedPaymentModal(loanData.id, clientInfo.id)} */}
+                     
                       {selectedLoan && (
                         <LoanSchedulePaymentModal
                           schedModalToggle={schedModalToggle}
