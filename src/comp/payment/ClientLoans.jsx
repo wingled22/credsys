@@ -135,15 +135,8 @@ const ClientLoans = ({ match }) => {
                         </Button>
 
                       </td>
-                     
-                      {selectedLoan && (
-                        <LoanSchedulePaymentModal
-                          schedModalToggle={schedModalToggle}
-                          toggle={toggle}
-                          id={selectedLoan}
-                          clientId={clientInfo.id}
-                        />
-                      )}
+
+
                     </tr>
 
 
@@ -151,6 +144,14 @@ const ClientLoans = ({ match }) => {
                   );
                 })}
               </tbody>
+              {selectedLoan && (
+                <LoanSchedulePaymentModal
+                  schedModalToggle={schedModalToggle}
+                  toggle={toggle}
+                  id={selectedLoan}
+                  clientId={clientInfo.id}
+                />
+              )}
             </Table>
           )}
         </Col>
