@@ -128,7 +128,6 @@ const ClientLoans = ({ match }) => {
                           onClick={(e, row) => {
                             setSelectedLoan(loanData.id);
                             toggle();
-                            console.log(e.row);
                           }}
                         >
                           <FontAwesomeIcon icon={faEye} />
