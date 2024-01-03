@@ -62,20 +62,17 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
         fetchData();
     }, [])
 
-    const getLoanSchedule = async () => {
+    const getLoanSchedule = async (loanId) => {
         try {
-            const response = await fetch("http://localhost:5034/api/client/GetClientLoans?id=" + id);
-            const data = await response.json();
-            // setLoans((prevLoans) =>{
-            //     return [...prevLoans, data]
-            // });
-            setSchedules(data)
-            setLoadingScheds(false);
+          const response = await fetch(`http://localhost:5034/api/Schedule/GetSchedulesByLoanId?id=${loanId}`);
+          const data = await response.json();
+          setSchedules(data);
+          setLoadingScheds(false);
         } catch (error) {
-            console.error("Error fetching data:", error);
-            setLoadingScheds(false);
+          console.error("Error fetching data:", error);
+          setLoadingScheds(false);
         }
-    }
+      };
 
     // const renderScheduleModal = () => {
     //     return (
@@ -153,6 +150,7 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                                                         onClick={() => {
                                                             setSelectedLoan(loanData.id);
                                                             toggle();
+                                                            getLoanSchedule(loanData.id);
                                                         }}
                                                     >
                                                         <FontAwesomeIcon icon={faEye} />
@@ -164,11 +162,11 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                                                         View info
                                                     </Button> */}
                                                 </td>
-                                                <LoanScheduleModal
+                                                {/* <LoanScheduleModal
                                                     schedModalToggle={schedModalToggle}
                                                     toggle={toggle}
                                                     id={loanData.id}
-                                                />
+                                                /> */}
                                             </tr>
 
 
@@ -177,6 +175,10 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                                     })}
                                 </tbody>
                             </Table>
+                        )}
+
+                        {selectedLoan !== null && (
+                            <LoanScheduleModal schedModalToggle={schedModalToggle} toggle={toggle} id={selectedLoan} />
                         )}
                     </div>
                 </td>

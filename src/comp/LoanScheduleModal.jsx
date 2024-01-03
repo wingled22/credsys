@@ -23,7 +23,7 @@ const LoanScheduleModal = ({ schedModalToggle, toggle, id }) => {
 
     useEffect(() => {
         getLoanSchedule();
-    }, [])
+    }, [id])
 
 
     return (
