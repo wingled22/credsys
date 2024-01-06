@@ -13,13 +13,10 @@ const TableClientAccordionItem = ({ rowData }) => {
     };
 
     const renderDetails = (rowData) => {
-
         if (expandedRow) {
             return <TableClientAccordionItemDetail {...rowData} />
         }
         return null;
-
-
     };
 
     
@@ -54,6 +51,7 @@ const TableClientAccordionItem = ({ rowData }) => {
                     >
                         View Loan
                     </Button>
+                   
                 </td>
             </tr>
             {renderDetails(rowData)}

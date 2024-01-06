@@ -27,6 +27,10 @@ export default function Sidebar() {
                     <FontAwesomeIcon icon={faCashRegister} size="2x" />
                 </NavLink>
 
+                <NavLink className="nav-item" to={"/reports"} activeclassname="active">
+                    <FontAwesomeIcon icon={faFileInvoice} size="2x" />
+                </NavLink>
+
                 {/* 
                      <NavLink className="nav-item" to={"/reports"} activeclassname="active">
                         <FontAwesomeIcon icon={faFileInvoice} size="2x" />

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Button, ButtonGroup, Modal, Table, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import LoanScheduleModal from "./LoanScheduleModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons"
+import { faEye, faFileAlt } from "@fortawesome/free-solid-svg-icons"
 import NewClientLoan from "./NewClientLoan";
 
 
@@ -155,12 +155,14 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                                                     >
                                                         <FontAwesomeIcon icon={faEye} />
                                                     </Button>
-                                                    {/* <Button
+                                                    <Button
                                                         color="success"
                                                         size="sm"
+                                                        className="mx-1"
+
                                                     >
-                                                        View info
-                                                    </Button> */}
+                                                        <FontAwesomeIcon icon={faFileAlt} />
+                                                    </Button>
                                                 </td>
                                                 {/* <LoanScheduleModal
                                                     schedModalToggle={schedModalToggle}
