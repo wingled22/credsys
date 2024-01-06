@@ -21,6 +21,7 @@ const ReportPromisory = () => {
         'July', 'August', 'September', 'October', 'November', 'December'
     ];
 
+
     const getReport = async () => {
         try {
 
@@ -37,10 +38,12 @@ const ReportPromisory = () => {
         }
     };
 
+
     useEffect(() => {
         getReport();
         // console.log(`${import.meta.env.VITE_REACT_APP_API_URL}/api/Reports/PromisoryReport?loanId=${loanId}`);
     }, []);
+
 
 
     return (
@@ -128,7 +131,7 @@ const ReportPromisory = () => {
                                                 <tr key={`sched-${sched.id}`}>
                                                     <td>Php {sched.collectables}</td>
                                                     <td>
-                                                        {`${months[new Date(sched.date).getMonth()]} ${new Date(sched.date).getDate()}, ${new Date(sched.date).getFullYear()}`}  
+                                                        {`${months[new Date(sched.date).getMonth()]} ${new Date(sched.date).getDate()}, ${new Date(sched.date).getFullYear()}`}
                                                     </td>
                                                 </tr>
                                             )
@@ -143,12 +146,22 @@ const ReportPromisory = () => {
                             <p>Address: ________________________</p>
                             <p>Date: ________________________</p>
 
-                            <p>I ________________________ agree to pay the sum ________________________ pesos for value received, with interest payable on or before ________________________</p>
+                            <p>
+                                I <u><strong>{reportData.clientInfo.name}</strong></u> agree to pay the sum <u><strong> Php {reportData.loanInfo.capital + reportData.loanInfo.interestedAmount} </strong></u>
+                                pesos for value received, with interest payable on or before <u> <strong> {`${months[new Date(reportData.loanInfo.dueDate).getMonth()]} ${new Date(reportData.loanInfo.dueDate).getDate()}, ${new Date(reportData.loanInfo.dueDate).getFullYear()}`}  </strong> </u> </p>
 
                             <div className="signature-section">
                                 <div className="overprinted-name">
-                                    <p>________________________</p>
-                                    <p>SIGNATURE OVER PRINTED NAME</p>
+                                    <u style={{lineHeight:.1}}>
+                                        <p>Dr.  Jonel Rhey D. Gelig</p>
+
+                                    </u>
+                                    <p style={{lineHeight:.1}}>
+                                        <small>
+                                        SIGNATURE OVER PRINTED NAME
+
+                                        </small>
+                                    </p>
                                 </div>
                             </div>
                         </section>
@@ -158,12 +171,20 @@ const ReportPromisory = () => {
                             <p>Address: ________________________</p>
                             <p>Date: ________________________</p>
 
-                            <p>This is to certify the CBU of ________________________, amounting to ________________________, an equivalent of __________ shares. Furthermore, dividend sharing shall be done every end of the year.</p>
+                            <p>This is to certify the CBU of <u><strong>{reportData.clientInfo.name}</strong></u> , amounting to  <u><strong> {reportData.loanInfo.deductCbu} </strong></u> , an equivalent of __________ shares. Furthermore, dividend sharing shall be done every end of the year.</p>
 
                             <div className="signature-section">
                                 <div className="overprinted-name">
-                                    <p>________________________</p>
-                                    <p>KASKWEK PRESIDENT</p>
+                                    <u style={{lineHeight:.1}}>
+                                        <p>Dr.  Jonel Rhey D. Gelig</p>
+
+                                    </u>
+                                    <p style={{lineHeight:.1}}>
+                                        <small>
+                                        SIGNATURE OVER PRINTED NAME
+
+                                        </small>
+                                    </p>
                                 </div>
                             </div>
                         </section>
@@ -173,12 +194,20 @@ const ReportPromisory = () => {
                             <p>Address: ________________________</p>
                             <p>Date: ________________________</p>
 
-                            <p>This  is to certify that the INSURED NAME is entitled for a LIFE INSURANCE, in case of sudden accident/normal death within the period of (________________________). Furthermore, the ammoung received is  ________________________. </p>
+                            <p>This  is to certify that the INSURED NAME is entitled for a LIFE INSURANCE, in case of sudden accident/normal death within the period of (________________________). Furthermore, the ammoung received is <u><strong>{reportData.loanInfo.deductInsurance}</strong></u> . </p>
 
                             <div className="signature-section">
                                 <div className="overprinted-name">
-                                    <p>________________________</p>
-                                    <p>KASKWEK PRESIDENT</p>
+                                    <u style={{lineHeight:.1}}>
+                                        <p>Dr.  Jonel Rhey D. Gelig</p>
+
+                                    </u>
+                                    <p style={{lineHeight:.1}}>
+                                        <small>
+                                        SIGNATURE OVER PRINTED NAME
+
+                                        </small>
+                                    </p>
                                 </div>
                             </div>
                         </section>

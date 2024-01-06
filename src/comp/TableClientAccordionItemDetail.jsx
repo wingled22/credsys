@@ -4,6 +4,7 @@ import LoanScheduleModal from "./LoanScheduleModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faFileAlt } from "@fortawesome/free-solid-svg-icons"
 import NewClientLoan from "./NewClientLoan";
+import { Link } from "react-router-dom";
 
 
 const TableClientAccordionItemDetail = ({ id, name }) => {
@@ -64,15 +65,15 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
 
     const getLoanSchedule = async (loanId) => {
         try {
-          const response = await fetch(`http://localhost:5034/api/Schedule/GetSchedulesByLoanId?id=${loanId}`);
-          const data = await response.json();
-          setSchedules(data);
-          setLoadingScheds(false);
+            const response = await fetch(`http://localhost:5034/api/Schedule/GetSchedulesByLoanId?id=${loanId}`);
+            const data = await response.json();
+            setSchedules(data);
+            setLoadingScheds(false);
         } catch (error) {
-          console.error("Error fetching data:", error);
-          setLoadingScheds(false);
+            console.error("Error fetching data:", error);
+            setLoadingScheds(false);
         }
-      };
+    };
 
     // const renderScheduleModal = () => {
     //     return (
@@ -155,14 +156,16 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                                                     >
                                                         <FontAwesomeIcon icon={faEye} />
                                                     </Button>
-                                                    <Button
-                                                        color="success"
-                                                        size="sm"
-                                                        className="mx-1"
+                                                    <Link to={`/reports/promisory/${loanData.id}`}>
+                                                        <Button
+                                                            color="success"
+                                                            size="sm"
+                                                            className="mx-1"
 
-                                                    >
-                                                        <FontAwesomeIcon icon={faFileAlt} />
-                                                    </Button>
+                                                        >
+                                                            <FontAwesomeIcon icon={faFileAlt} />
+                                                        </Button>
+                                                    </Link>
                                                 </td>
                                                 {/* <LoanScheduleModal
                                                     schedModalToggle={schedModalToggle}
