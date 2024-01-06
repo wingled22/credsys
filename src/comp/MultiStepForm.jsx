@@ -24,6 +24,7 @@ const MultiStepForm = ({ onStepClick, toggleModal, onFinish }) => {
     deductCBU: 0,
     deductInsurance: 0,
     deductOther: 0,
+    dateTime: new Date(),
   });
 
   const [provinces, setProvinces] = useState(province);
@@ -119,10 +120,19 @@ const MultiStepForm = ({ onStepClick, toggleModal, onFinish }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+
+    if (name == "dateTime") {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: new Date(value),
+      }));
+    } else {
+
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const nextStep = (e) => {
@@ -371,6 +381,21 @@ const MultiStepForm = ({ onStepClick, toggleModal, onFinish }) => {
             <h4>Step 2: Loan Information</h4>
             <form onSubmit={handleSubmit}>
               <Row>
+                <Col md={12}>
+                  <FormGroup>
+                    <Label>Date loan created</Label>
+                    <Input
+                      required
+                      type="date"
+                      name="dateTime"
+                      // value={formData.dateTime}
+                      value={formData.dateTime.toISOString().split('T')[0]}
+                      onChange={handleInputChange}
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row>
                 <Col md={6}>
                   <FormGroup>
                     <Label>
@@ -383,7 +408,7 @@ const MultiStepForm = ({ onStepClick, toggleModal, onFinish }) => {
                       defaultValue={'default'}
                       onChange={handleInputChange}
                       required
-                    
+
                     >
                       <option value="default" disabled hidden>
                         Select Loan Type

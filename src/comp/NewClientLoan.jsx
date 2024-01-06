@@ -3,7 +3,7 @@ import { Modal, ModalHeader, ModalBody, Container, Form, Input, Row, Col, FormGr
 import toastr from "toastr";
 
 
-const NewClientLoan = ({ modal, toggle, clientId,onLoanSubmitted }) => {
+const NewClientLoan = ({ modal, toggle, clientId, onLoanSubmitted }) => {
     const [formData, setFormData] = useState({
         clientId: clientId,
         loanType: '',
@@ -13,6 +13,7 @@ const NewClientLoan = ({ modal, toggle, clientId,onLoanSubmitted }) => {
         deductCBU: 0,
         deductInsurance: 0,
         deductOther: 0,
+        dateTime: new Date(),
     });
     const [totalBringHome, setTotalBringHome] = useState(0);
     const [interestedAmount, setInterestedAmount] = useState(0);
@@ -24,10 +25,22 @@ const NewClientLoan = ({ modal, toggle, clientId,onLoanSubmitted }) => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
+
+        if (name == "dateTime") {
+            // console.log("Datetime is changed")
+            // console.log(value)
+            setFormData((prevData) => ({
+                ...prevData,
+                [name]: new Date(value),
+            }));
+        } else {
+
+            setFormData((prevData) => ({
+                ...prevData,
+                [name]: value,
+            }));
+        }
+
 
     };
 
@@ -46,7 +59,7 @@ const NewClientLoan = ({ modal, toggle, clientId,onLoanSubmitted }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-      
+
         try {
             const response = await fetch('http://localhost:5034/api/Client/PostClientLoan', {
                 method: 'POST',
@@ -72,11 +85,13 @@ const NewClientLoan = ({ modal, toggle, clientId,onLoanSubmitted }) => {
 
             // Close the modal
             toggle();
-            toastr.success("Successfully added the new loan","Success")
+            toastr.success("Successfully added the new loan", "Success")
         } catch (error) {
             console.error('Error submitting form:', error.message);
         }
     };
+
+    console.table(formData);
 
 
     return (
@@ -86,6 +101,21 @@ const NewClientLoan = ({ modal, toggle, clientId,onLoanSubmitted }) => {
                 <ModalBody>
                     <Container>
                         <Form onSubmit={handleSubmit}>
+                            <Row>
+                                <Col md={12}>
+                                    <FormGroup>
+                                        <Label>Date loan created</Label>
+                                        <Input
+                                            required
+                                            type="date"
+                                            name="dateTime"
+                                            // value={formData.dateTime}
+                                            value={formData.dateTime.toISOString().split('T')[0]}
+                                            onChange={handleInputChange}
+                                        />
+                                    </FormGroup>
+                                </Col>
+                            </Row>
                             <Row>
                                 <Col md={6}>
                                     <FormGroup>
