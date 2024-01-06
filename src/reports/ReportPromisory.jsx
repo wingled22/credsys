@@ -16,6 +16,10 @@ const ReportPromisory = () => {
     const [reportData, setReportData] = useState(null);
     const { loanId } = useParams();
 
+    const months = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ];
 
     const getReport = async () => {
         try {
@@ -118,18 +122,18 @@ const ReportPromisory = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Php 2,000.00</td>
-                                        <td>January 15, 2024</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Php 2,000.00</td>
-                                        <td>February 15, 2024</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Php 2,000.00</td>
-                                        <td>March 15, 2024</td>
-                                    </tr>
+                                    {
+                                        reportData.listOfSchedules.map((sched) => {
+                                            return (
+                                                <tr key={`sched-${sched.id}`}>
+                                                    <td>Php {sched.collectables}</td>
+                                                    <td>
+                                                        {`${months[new Date(sched.date).getMonth()]} ${new Date(sched.date).getDate()}, ${new Date(sched.date).getFullYear()}`}  
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
                                 </tbody>
                             </table>
                         </section>
