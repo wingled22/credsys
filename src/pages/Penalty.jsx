@@ -3,6 +3,7 @@ import { Button, Col, Container, Form, FormGroup, Input, Label, Modal, ModalBody
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faFileAlt, faPlus } from "@fortawesome/free-solid-svg-icons"
 import PenaltyAddModal from '../comp/PenaltyAddModal';
+import { Link } from 'react-router-dom';
 
 
 const Penalty = () => {
@@ -26,9 +27,13 @@ const Penalty = () => {
         setLoading(false);
     }
 
+    const onPenaltySubmitted  = () => {
+        getPastDueLoans();
+    }
+
     useState(() => {
         getPastDueLoans();
-    }, []);
+    }, [pastDueLoans]);
 
     return (
         <>
@@ -40,6 +45,9 @@ const Penalty = () => {
                 padding: 30
             }}>
                 <h3>Penalty</h3>
+                
+                <Link to="/">Go to penalized loan</Link>
+
                 <Table striped size="sm" >
                     <thead>
                         <tr>
@@ -87,7 +95,7 @@ const Penalty = () => {
 
             </Col>
             {selectedLoan !== null && (
-                <PenaltyAddModal modal={modal} toggle={toggle} id={selectedLoan}/>
+                <PenaltyAddModal modal={modal} toggle={toggle} id={selectedLoan}  onPenaltySubmitted={onPenaltySubmitted} />
             )}
 
         </>
