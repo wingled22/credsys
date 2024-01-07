@@ -13,3 +13,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </Router>
   </React.StrictMode>,
 )
+//TODO:penalty
+//TODO:Collectors
+//TODO:Reports
