@@ -10,6 +10,8 @@ import App from './App.jsx';
 import ReportCBU from './reports/ReportCBU.jsx';
 import ReportPromisory from './reports/ReportPromisory.jsx';
 import Penalty from './pages/Penalty.jsx';
+import Penalized from './pages/Penaiized.jsx';
+import PenaltyPaymentRegister from './comp/payment/PenaltyPaymentRegister.jsx';
 
 const AppRouter = () => {
     return (
@@ -21,6 +23,8 @@ const AppRouter = () => {
                 <Route path="/payment/clientloans/:clientId" element={<ClientLoans />} />
                 <Route path="/payment/paymentregister/:clientId/:scheduleId" element={<PaymentRegister />} />
                 <Route path="/penalty" element={<Penalty />} />
+                <Route path="/penalized" element={<Penalized />} />
+                <Route path="/penalized/paymentregister/:clientId/:loanId" element={<PenaltyPaymentRegister />} />
                 <Route path="/reports" element={<Reports />} />
                 <Route path="/reports/cbu" element={<ReportCBU />} />
                 <Route path="/reports/promisory/:loanId" element={<ReportPromisory />} />

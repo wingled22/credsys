@@ -27,7 +27,7 @@ const Penalty = () => {
         setLoading(false);
     }
 
-    const onPenaltySubmitted  = () => {
+    const onPenaltySubmitted = () => {
         getPastDueLoans();
     }
 
@@ -37,18 +37,24 @@ const Penalty = () => {
 
     return (
         <>
-            
+
             <Col style={{
                 background: "whitesmoke",
                 minWidth: 400,
                 borderRadius: 30,
                 padding: 30
             }}>
-                <h3>Penalty</h3>
-                
-                <Link to="/">Go to penalized loan</Link>
+                <h3>Past-Due Loans</h3>
 
-                <Table striped size="sm" >
+                <Link to="/penalized" className=''>
+                    <Button 
+                        color='warning'
+                        style={{}}
+                    >
+                        Go to penalized loan
+                    </Button>
+                </Link>
+                <Table striped size="sm" className='mt-3'>
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -95,7 +101,7 @@ const Penalty = () => {
 
             </Col>
             {selectedLoan !== null && (
-                <PenaltyAddModal modal={modal} toggle={toggle} id={selectedLoan}  onPenaltySubmitted={onPenaltySubmitted} />
+                <PenaltyAddModal modal={modal} toggle={toggle} id={selectedLoan} onPenaltySubmitted={onPenaltySubmitted} />
             )}
 
         </>
