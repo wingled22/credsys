@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Col } from 'reactstrap';
+import React, { useEffect, useRef, useState } from 'react';
+import { Button, Col } from 'reactstrap';
 import { useParams } from 'react-router-dom';
+import ReactToPrint from 'react-to-print';
 
 
 import province from "../comp/address/province.json";
@@ -8,6 +9,8 @@ import city from "../comp/address/city.json";
 import barangay from "../comp/address/barangay.json";
 
 import "./ReportPromisory.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPrint } from "@fortawesome/free-solid-svg-icons"
 
 
 
@@ -15,6 +18,7 @@ const ReportPromisory = () => {
 
     const [reportData, setReportData] = useState(null);
     const { loanId } = useParams();
+    const componentRef = useRef();
 
     const months = [
         'January', 'February', 'March', 'April', 'May', 'June',
@@ -55,10 +59,20 @@ const ReportPromisory = () => {
             padding: 30
         }}>
             <h5>Promisory Note</h5>
+            {/* ReactToPrint component */}
+            <ReactToPrint
+                trigger={() => 
+                    <Button color='success'>
+                        <FontAwesomeIcon icon={faPrint}/>
+                    </Button>
+                } // You can use any element as a trigger
+                content={() => componentRef.current} // Provide a reference to the component you want to print
+            />
 
             {
                 reportData == null ? null : (
-                    <div className="promissory-note">
+                    
+                    <div className="promissory-note" ref={componentRef}>
                         <section className="section borrower-info-section">
                             <h2>Borrower's Information</h2>
                             <div className="horizontal-info">
