@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react"
 import { Button, ButtonGroup, Modal, Table, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import LoanScheduleModal from "./LoanScheduleModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faFileAlt } from "@fortawesome/free-solid-svg-icons"
+import { faEye, faFileAlt, faMoneyBillTransfer } from "@fortawesome/free-solid-svg-icons"
 import NewClientLoan from "./NewClientLoan";
 import { Link } from "react-router-dom";
+import TransactionModal from "./TransactionModal";
 
 
 const TableClientAccordionItemDetail = ({ id, name }) => {
@@ -12,18 +13,26 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
     const [loadingLoans, setLoadingLoans] = useState(true);
     const [schedules, setSchedules] = useState([]);
     const [loadingScheds, setLoadingScheds] = useState(true);
-    const [schedModalToggle, setSchedModalToggle] = useState(false);
-    const [newClientLoanModalIsOpen, setNewClientLoanModalIsOpen] = useState(false);
-
     const [selectedLoan, setSelectedLoan] = useState(null);
+    const [selectedLoanForTrans, setSelectedLoanForTrans] = useState(null);
 
 
+    //modal states
+    const [newClientLoanModalIsOpen, setNewClientLoanModalIsOpen] = useState(false);
+    const [schedModalToggle, setSchedModalToggle] = useState(false);
+    const [viewTrasactionViewModalIsOpen, setViewTransactionModalIsOpen] = useState(false);
+
+
+    //toggles
     const toggleCreateNewLoanModal = () => setNewClientLoanModalIsOpen(!newClientLoanModalIsOpen);
+    const toggle = () => setSchedModalToggle(!schedModalToggle);
+    const toggleTransactionsModal = () => setViewTransactionModalIsOpen(!viewTrasactionViewModalIsOpen);
+
+
 
     const renderNewLoanModal = () => {
         return <NewClientLoan modal={newClientLoanModalIsOpen} toggle={toggleCreateNewLoanModal} clientId={id} onLoanSubmitted={onLoanSubmitted} />;
     }
-    const toggle = () => setSchedModalToggle(!schedModalToggle);
 
 
 
@@ -78,20 +87,15 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
 
     const isPenalized = (collected, totalAmount, penalty) => {
 
-        if( (totalAmount+penalty) - collected == 0 ){
+        if ((totalAmount + penalty) - collected == 0) {
             return "Paid"
-        } else{
+        } else {
             return "Penalized"
         }
 
     }
 
 
-    // const renderScheduleModal = () => {
-    //     return (
-    //         <LoanScheduleModal schedModalToggle={schedModalToggle} toggle={toggle} />
-    //     )
-    // }
 
 
 
@@ -178,12 +182,25 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                                                             <FontAwesomeIcon icon={faFileAlt} />
                                                         </Button>
                                                     </Link>
+
+                                                    {
+                                                        loanData.collected > 0 && (
+                                                            <Button color="success"
+                                                                size="sm"
+                                                                className="mx-1"
+                                                                onClick={() => {
+                                                                    setSelectedLoanForTrans(loanData.id)
+                                                                    toggleTransactionsModal();
+                                                                }}
+                                                            >
+                                                                <FontAwesomeIcon icon={faMoneyBillTransfer} />
+                                                            </Button>
+                                                        )
+                                                    }
+
+
                                                 </td>
-                                                {/* <LoanScheduleModal
-                                                    schedModalToggle={schedModalToggle}
-                                                    toggle={toggle}
-                                                    id={loanData.id}
-                                                /> */}
+                                             
                                             </tr>
 
 
@@ -196,6 +213,10 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
 
                         {selectedLoan !== null && (
                             <LoanScheduleModal schedModalToggle={schedModalToggle} toggle={toggle} id={selectedLoan} />
+                        )}
+
+                        {selectedLoanForTrans !== null && (
+                            <TransactionModal viewTrasactionViewModalIsOpen={viewTrasactionViewModalIsOpen} toggleTransactionsModal={toggleTransactionsModal} loanId={selectedLoanForTrans} />
                         )}
                     </div>
                 </td>
