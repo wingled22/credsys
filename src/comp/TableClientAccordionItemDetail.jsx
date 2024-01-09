@@ -75,6 +75,18 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
         }
     };
 
+
+    const isPenalized = (collected, totalAmount, penalty) => {
+
+        if( (totalAmount+penalty) - collected == 0 ){
+            return "Paid"
+        } else{
+            return "Penalized"
+        }
+
+    }
+
+
     // const renderScheduleModal = () => {
     //     return (
     //         <LoanScheduleModal schedModalToggle={schedModalToggle} toggle={toggle} />
@@ -139,7 +151,7 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                                                 <td>{loanData.noPayment}</td>
                                                 <td>{loanData.loanAmount}</td>
                                                 <td>{loanData.collected}</td>
-                                                <td>{loanData.loanAmount - loanData.collected}</td>
+                                                <td>{loanData.loanAmount + loanData.totalPenalty - loanData.collected}</td>
                                                 <td>{loanData.status}</td>
 
                                                 <td>

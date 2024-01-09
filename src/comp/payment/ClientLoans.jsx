@@ -117,7 +117,7 @@ const ClientLoans = ({ match }) => {
                       <td>{loanData.capital}</td>
                       <td>{loanData.interest}</td>
                       <td>{loanData.interestedAmount}</td>
-                      <td>{loanData.loanAmount - loanData.collected}</td>
+                      <td>{loanData.loanAmount + loanData.totalPenalty - loanData.collected}</td>
                       <td>{loanData.collected}</td>
                       <td>
                         <Button
