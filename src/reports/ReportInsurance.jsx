@@ -11,7 +11,7 @@ import { faHourglass1, faLeftLong, faPrint, faUser, faUsers } from "@fortawesome
 import "../pages/Clients.css";
 import "../pages/dash.css";
 
-const ReportCBU = () => {
+const ReportInsurance = () => {
 
     const [reportData, setReportData] = useState([])
     const [loading, setLoading] = useState(true);
@@ -52,7 +52,7 @@ const ReportCBU = () => {
             console.log(formData);
 
             const response = await fetch(
-                `${import.meta.env.VITE_REACT_APP_API_URL}/api/Reports/GetDeductionCBUs`,
+                `${import.meta.env.VITE_REACT_APP_API_URL}/api/Reports/GetDeductionInsurances`,
                 {
                     method: 'POST',
                     headers: {
@@ -86,7 +86,7 @@ const ReportCBU = () => {
             padding: 30
         }}>
             <div className="overflow-auto client-table-container" style={{ margin: 20, height: "90%" }}>
-                <h2>report cbu</h2>
+                <h2>Insurance Report</h2>
                 <Form onSubmit={submitHandler}>
                     <Row>
                         <Col md={6}>
@@ -140,7 +140,7 @@ const ReportCBU = () => {
                             />
                             <div ref={componentRef} style={{ padding: 20 }}>
                                 <center>
-                                    <h5>CBU Results</h5>
+                                    <h5>Insurance Results</h5>
                                     <p>From : {new Date(from).toDateString()}  - To : {new Date(to).toDateString()}</p>
 
                                 </center>
@@ -159,7 +159,7 @@ const ReportCBU = () => {
                                             <tr key={item.id}>
                                                 <td>{item.id}</td>
                                                 <td>{item.loanId}</td>
-                                                <td>{item.totalCbu}</td>
+                                                <td>{item.totalInsurance}</td>
                                                 <td>{new Date(item.dateAdded).toLocaleDateString()}</td>
                                             </tr>
                                         ))}
@@ -178,4 +178,4 @@ const ReportCBU = () => {
     );
 }
 
-export default ReportCBU;
+export default ReportInsurance;
