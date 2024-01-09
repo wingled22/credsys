@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Button, Col } from 'reactstrap';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ReactToPrint from 'react-to-print';
 
 
@@ -10,7 +10,7 @@ import barangay from "../comp/address/barangay.json";
 
 import "./ReportPromisory.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPrint } from "@fortawesome/free-solid-svg-icons"
+import { faHourglass1, faLeftLong, faPrint, faUser, faUsers } from "@fortawesome/free-solid-svg-icons"
 
 
 
@@ -20,11 +20,18 @@ const ReportPromisory = () => {
     const { loanId } = useParams();
     const componentRef = useRef();
 
+    const navigate = useNavigate();
+
     const months = [
         'January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'
     ];
 
+    // functions
+
+    const goBackOneStep = () => {
+        navigate(-1); // This will navigate back by one step in the history
+    };
 
     const getReport = async () => {
         try {
@@ -59,19 +66,24 @@ const ReportPromisory = () => {
             padding: 30
         }}>
             <h5>Promisory Note</h5>
-            {/* ReactToPrint component */}
+            
+            <Button color='warning'
+                onClick={goBackOneStep}
+            >
+                <FontAwesomeIcon icon={faLeftLong} color='whitesmoke' />
+            </Button>
             <ReactToPrint
-                trigger={() => 
-                    <Button color='success'>
-                        <FontAwesomeIcon icon={faPrint}/>
+                trigger={() =>
+                    <Button color='success' className="mx-1" >
+                        <FontAwesomeIcon icon={faPrint} />
                     </Button>
-                } // You can use any element as a trigger
-                content={() => componentRef.current} // Provide a reference to the component you want to print
+                }
+                content={() => componentRef.current}
             />
 
             {
-                reportData == null ? null : (
-                    
+                reportData == null ? ( <h4>Loading reports</h4> ) : (
+
                     <div className="promissory-note" ref={componentRef}>
                         <section className="section borrower-info-section">
                             <h2>Borrower's Information</h2>
@@ -166,13 +178,13 @@ const ReportPromisory = () => {
 
                             <div className="signature-section">
                                 <div className="overprinted-name">
-                                    <u style={{lineHeight:.1}}>
+                                    <u style={{ lineHeight: .1 }}>
                                         <p>Dr.  Jonel Rhey D. Gelig</p>
 
                                     </u>
-                                    <p style={{lineHeight:.1}}>
+                                    <p style={{ lineHeight: .1 }}>
                                         <small>
-                                        SIGNATURE OVER PRINTED NAME
+                                            SIGNATURE OVER PRINTED NAME
 
                                         </small>
                                     </p>
@@ -189,13 +201,13 @@ const ReportPromisory = () => {
 
                             <div className="signature-section">
                                 <div className="overprinted-name">
-                                    <u style={{lineHeight:.1}}>
+                                    <u style={{ lineHeight: .1 }}>
                                         <p>Dr.  Jonel Rhey D. Gelig</p>
 
                                     </u>
-                                    <p style={{lineHeight:.1}}>
+                                    <p style={{ lineHeight: .1 }}>
                                         <small>
-                                        SIGNATURE OVER PRINTED NAME
+                                            SIGNATURE OVER PRINTED NAME
 
                                         </small>
                                     </p>
@@ -212,13 +224,13 @@ const ReportPromisory = () => {
 
                             <div className="signature-section">
                                 <div className="overprinted-name">
-                                    <u style={{lineHeight:.1}}>
+                                    <u style={{ lineHeight: .1 }}>
                                         <p>Dr.  Jonel Rhey D. Gelig</p>
 
                                     </u>
-                                    <p style={{lineHeight:.1}}>
+                                    <p style={{ lineHeight: .1 }}>
                                         <small>
-                                        SIGNATURE OVER PRINTED NAME
+                                            SIGNATURE OVER PRINTED NAME
 
                                         </small>
                                     </p>
