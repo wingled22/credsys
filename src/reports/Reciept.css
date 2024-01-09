@@ -1,0 +1,59 @@
+.receipt {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to bottom, #fff 0%, #f9f9f9 100%);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 2em;
+    font-weight: bold;
+    color: #3498db; /* Use a color that fits your brand */
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.company-info {
+    margin-bottom: 20px;
+}
+
+.company-info p {
+    margin: 8px 0;
+    color: #555;
+}
+
+.transaction-details,
+.loan-details,
+.repayment-info,
+.payment-details,
+.signature {
+    margin-bottom: 15px;
+}
+
+.item {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.footer {
+    text-align: center;
+    color: #777;
+    margin-top: 20px;
+}
+
+.footer p {
+    margin: 0;
+}
+.digital-signature-placeholder {
+    height: 50px; /* Adjust the height based on your design */
+    border-bottom: 2px solid #555;
+    margin-top: 10px;
+}

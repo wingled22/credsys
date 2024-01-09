@@ -2,7 +2,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faFileAlt, faMoneyBillTransfer, faPrint } from "@fortawesome/free-solid-svg-icons"
 import React, { useEffect, useState } from 'react';
 import { Button, Modal, ModalBody, ModalHeader, Table } from 'reactstrap';
-const TransactionModal = ({viewTrasactionViewModalIsOpen, toggleTransactionsModal, loanId}) => {
+import { Link } from 'react-router-dom';
+const TransactionModal = ({ viewTrasactionViewModalIsOpen, toggleTransactionsModal, loanId }) => {
 
     const [loading, setLoading] = useState(true);
     const [trans, setTrans] = useState([])
@@ -11,7 +12,7 @@ const TransactionModal = ({viewTrasactionViewModalIsOpen, toggleTransactionsModa
         try {
             const response = await fetch("http://localhost:5034/api/Transaction/GetTransactions?loanId=" + loanId);
             const data = await response.json();
-           
+
             setTrans(data)
             setLoading(false);
         } catch (error) {
@@ -20,7 +21,9 @@ const TransactionModal = ({viewTrasactionViewModalIsOpen, toggleTransactionsModa
         }
     }
 
-    // console.table(schedules);
+    const handlePrint = (transId) => {
+        const printWindow = window.open(`/printreciept`, "_blank");
+    };
 
     useEffect(() => {
         getTrans();
@@ -51,13 +54,16 @@ const TransactionModal = ({viewTrasactionViewModalIsOpen, toggleTransactionsModa
                                         <td>{item.amount}</td>
                                         <td>{item.paymentDate}</td>
                                         <td>
-                                            <Button
-                                                color="success"
-                                                size="sm"
-                                                className="mx-1"
-                                            >
-                                                <FontAwesomeIcon icon={faPrint} />
-                                            </Button>
+                                            <Link to={`/reports/reciept/${item.transId}`}>
+                                                <Button
+                                                    color="success"
+                                                    size="sm"
+                                                    className="mx-1"
+                                                // onClick={handlePrint}
+                                                >
+                                                    <FontAwesomeIcon icon={faPrint} />
+                                                </Button>
+                                            </Link>
                                         </td>
                                     </tr>
                                 ))}
