@@ -14,6 +14,7 @@ import Penalized from './pages/Penaiized.jsx';
 import PenaltyPaymentRegister from './comp/payment/PenaltyPaymentRegister.jsx';
 import Reciept from './reports/Reciept.jsx';
 import ReportInsurance from './reports/ReportInsurance.jsx';
+import DelinquentReport from './reports/DelinquentReport.jsx';
 
 const AppRouter = () => {
     return (
@@ -30,6 +31,7 @@ const AppRouter = () => {
                 <Route path="/reports" element={<Reports />} />
                 <Route path="/reports/cbu" element={<ReportCBU />} />
                 <Route path="/reports/insurance" element={<ReportInsurance />} />
+                <Route path="/reports/delinquent" element={<DelinquentReport />} />
                 <Route path="/reports/promisory/:loanId" element={<ReportPromisory />} />
                 <Route path="/reports/reciept/:transId" element={<Reciept />} />
             </Route>

@@ -23,6 +23,9 @@ const Reports = () => {
             <br />
             <Button>Itinerary report</Button>
             <br />
+            <Button>Delinquent report</Button>
+            <br />
+
 
             <Outlet />
         </Col>
