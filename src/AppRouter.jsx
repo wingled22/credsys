@@ -20,6 +20,7 @@ import UserContext from './UserContext.jsx';
 import Login from './Login.jsx';
 import ClientSide from './ClientSide.jsx';
 import ItineraryReport from './Itinerary.jsx';
+import ClientTransactions from './ClientTransaction.jsx';
 
 const AppRouter = () => {
     const [user, setUser] = useState(null);
@@ -49,7 +50,11 @@ const AppRouter = () => {
                     <Route path="/admin/reports/reciept/:transId" element={<Reciept />} />
                 </Route>
 
-                <Route path='/clients' element={<ClientSide/>}/> 
+                <Route path='/clients' element={<ClientSide/>}>
+                <Route path='/clients/transactions' element={<ClientTransactions />} />
+
+                    
+                </Route> 
 
                     
             </Routes>

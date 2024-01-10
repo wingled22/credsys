@@ -172,7 +172,7 @@ const TableClientAccordionItemDetail = ({ id, name }) => {
                                                     >
                                                         <FontAwesomeIcon icon={faEye} />
                                                     </Button>
-                                                    <Link to={`/reports/promisory/${loanData.id}`}>
+                                                    <Link to={`/admin/reports/promisory/${loanData.id}`}>
                                                         <Button
                                                             color="success"
                                                             size="sm"

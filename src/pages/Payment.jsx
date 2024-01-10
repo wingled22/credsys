@@ -87,7 +87,7 @@ const Payment = () => {
                                                 : (province.find((item) => item.province_code === client.province) ||
                                                     {}).province_name}</td>
                                         <td>
-                                            <Link to={`/payment/clientloans/${client.id}`}>
+                                            <Link to={`/admin/payment/clientloans/${client.id}`}>
                                                 <Button size='sm'>View Loan</Button>
                                             </Link>
                                         </td>

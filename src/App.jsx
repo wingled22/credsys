@@ -12,7 +12,6 @@ const App = ({children}) => {
             <div className="App">
                 <Sidebar/>
                 <Outlet/>
-                {children}
             </div>
         </>
     );

@@ -63,7 +63,7 @@ const LoanSchedulePaymentModal = ({ schedModalToggle, toggle, id, clientId }) =>
                         <FontAwesomeIcon icon={faCheck} style={{ color: "whitesmoke" }} />
                       </Button>
                     ) : (
-                      <Link to={`/payment/paymentregister/${clientId}/${item.id}`}>
+                      <Link to={`/admin/payment/paymentregister/${clientId}/${item.id}`}>
                         <Button size="sm" style={{ background: "#DFA248" }} className="mx-1">
                           <FontAwesomeIcon icon={faMoneyBill1Wave} style={{ color: "whitesmoke" }} />
                         </Button>

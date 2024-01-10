@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { Outlet, Link, NavLink , Navigate} from "react-router-dom";
+import { Outlet, Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUser, faCog, faSignOutAlt, faMoneyBill, faFileInvoice, faMoneyBill1, faMoneyBill1Wave, faCashRegister, faUsers, faWarning } from '@fortawesome/free-solid-svg-icons';
 
@@ -9,10 +9,7 @@ import UserContext from "../UserContext";
 export default function Sidebar() {
     const { user, setUser } = useContext(UserContext);
 
-    if (!user || user.usertype == 3  || user == undefined) {
-        // Redirect to login if no user or usertype is not 1 (admin)
-        return <Navigate to="/" />;
-      }
+    
     return <>
         <div className="sidebar">
             <div className="logo-container">
@@ -41,15 +38,7 @@ export default function Sidebar() {
                     <FontAwesomeIcon icon={faFileInvoice} size="lg" />
                 </NavLink>
 
-                {/* 
-                     <NavLink className="nav-item" to={"/reports"} activeclassname="active">
-                        <FontAwesomeIcon icon={faFileInvoice} size="2x" />
-                    </NavLink>
-                    
-                    <Link className="nav-item">
-                        <FontAwesomeIcon icon={faCog} size="2x" />
-                    </Link>
-                */}
+           
                 
                 <NavLink className="nav-item bottom" >
                     <FontAwesomeIcon icon={faSignOutAlt} size="lg" onClick={(e)=> {
