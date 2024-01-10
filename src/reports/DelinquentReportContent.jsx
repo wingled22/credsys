@@ -16,7 +16,8 @@ const DelinquentReportContent = ({ data, from, to }) => {
                 trigger={() => <Button color='success' className='mx-1'>
                     <FontAwesomeIcon icon={faPrint} />
                 </Button>}
-                content={() => componentRef.current} /><div ref={componentRef} style={{ padding: 20 }}>
+                content={() => componentRef.current} />
+                <div ref={componentRef} style={{ padding: 20 }}>
                 <center>
                     <h5>Insurance Results</h5>
                     <p>From : {new Date(from).toDateString()}  - To : {new Date(to).toDateString()}</p>

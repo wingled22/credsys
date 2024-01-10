@@ -86,7 +86,7 @@ const ReportCBU = () => {
             padding: 30
         }}>
             <div className="overflow-auto client-table-container" style={{ margin: 20, height: "90%" }}>
-                <h2>report cbu</h2>
+                <h2>CBU Report</h2>
                 <Form onSubmit={submitHandler}>
                     <Row>
                         <Col md={6}>

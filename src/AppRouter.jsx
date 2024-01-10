@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { Routes, Route, Outlet } from "react-router-dom";
 import Dash from "./pages/Dash";
 import Clients from "./pages/Clients";
@@ -15,27 +15,43 @@ import PenaltyPaymentRegister from './comp/payment/PenaltyPaymentRegister.jsx';
 import Reciept from './reports/Reciept.jsx';
 import ReportInsurance from './reports/ReportInsurance.jsx';
 import DelinquentReport from './reports/DelinquentReport.jsx';
+import RemittanceReport from './reports/RemittanceReport.jsx';
+import UserContext from './UserContext.jsx';
+import Login from './Login.jsx';
+import ClientSide from './ClientSide.jsx';
 
 const AppRouter = () => {
+    const [user, setUser] = useState(null);
+
+    const value = useMemo(() => ({ user, setUser }), [user, setUser]);
+
     return (
-        <Routes>
-            <Route path="/" element={<App />}>
-                <Route index element={<Dash />} />
-                <Route path="/clients" element={<Clients />} />
-                <Route path="/payment" element={<Payment />} />
-                <Route path="/payment/clientloans/:clientId" element={<ClientLoans />} />
-                <Route path="/payment/paymentregister/:clientId/:scheduleId" element={<PaymentRegister />} />
-                <Route path="/penalty" element={<Penalty />} />
-                <Route path="/penalized" element={<Penalized />} />
-                <Route path="/penalized/paymentregister/:clientId/:loanId" element={<PenaltyPaymentRegister />} />
-                <Route path="/reports" element={<Reports />} />
-                <Route path="/reports/cbu" element={<ReportCBU />} />
-                <Route path="/reports/insurance" element={<ReportInsurance />} />
-                <Route path="/reports/delinquent" element={<DelinquentReport />} />
-                <Route path="/reports/promisory/:loanId" element={<ReportPromisory />} />
-                <Route path="/reports/reciept/:transId" element={<Reciept />} />
-            </Route>
-        </Routes>
+        <UserContext.Provider value={value}>
+            <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/admin" element={<App />}>
+                    <Route path='/admin/dash' index element={<Dash />} />
+                    <Route path="/admin/clients" element={<Clients />} />
+                    <Route path="/admin/payment" element={<Payment />} />
+                    <Route path="/admin/payment/clientloans/:clientId" element={<ClientLoans />} />
+                    <Route path="/admin/payment/paymentregister/:clientId/:scheduleId" element={<PaymentRegister />} />
+                    <Route path="/admin/penalty" element={<Penalty />} />
+                    <Route path="/admin/penalized" element={<Penalized />} />
+                    <Route path="/admin/penalized/paymentregister/:clientId/:loanId" element={<PenaltyPaymentRegister />} />
+                    <Route path="/admin/reports" element={<Reports />} />
+                    <Route path="/admin/reports/cbu" element={<ReportCBU />} />
+                    <Route path="/admin/reports/insurance" element={<ReportInsurance />} />
+                    <Route path="/admin/reports/delinquent" element={<DelinquentReport />} />
+                    <Route path="/admin/reports/remittance" element={<RemittanceReport />} />
+                    <Route path="/admin/reports/promisory/:loanId" element={<ReportPromisory />} />
+                    <Route path="/admin/reports/reciept/:transId" element={<Reciept />} />
+                </Route>
+
+                <Route path='/client' element={<ClientSide/>}/> 
+
+                    
+            </Routes>
+        </UserContext.Provider>
     );
 }
 
