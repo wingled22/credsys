@@ -109,38 +109,41 @@ const ClientLoans = ({ match }) => {
               </thead>
               <tbody>
                 {loans.map((loanData) => {
-                  return (
-                    <tr key={`loanID-${loanData.id}`}>
-                      <td>{loanData.id}</td>
-                      <td>{loanData.type}</td>
-                      <td>{loanData.loanAmount}</td>
-                      <td>{loanData.capital}</td>
-                      <td>{loanData.interest}</td>
-                      <td>{loanData.interestedAmount}</td>
-                      <td>{loanData.loanAmount + loanData.totalPenalty - loanData.collected}</td>
-                      <td>{loanData.collected}</td>
-                      <td>
-                        <Button
-                          color="info"
-                          size="sm"
-                          //style={{marginRight: 10}}
-                          className="mx-1"
-                          onClick={(e, row) => {
-                            setSelectedLoan(loanData.id);
-                            toggle();
-                          }}
-                        >
-                          <FontAwesomeIcon icon={faEye} />
-                        </Button>
 
-                      </td>
-
-
-                    </tr>
-
-
-
-                  );
+                  if(loanData.totalPenalty == 0 ){
+                    return (
+                      <tr key={`loanID-${loanData.id}`}>
+                        <td>{loanData.id}</td>
+                        <td>{loanData.type}</td>
+                        <td>{loanData.loanAmount}</td>
+                        <td>{loanData.capital}</td>
+                        <td>{loanData.interest}</td>
+                        <td>{loanData.interestedAmount}</td>
+                        <td>{loanData.loanAmount + loanData.totalPenalty - loanData.collected}</td>
+                        <td>{loanData.collected}</td>
+                        <td>
+                          <Button
+                            color="info"
+                            size="sm"
+                            //style={{marginRight: 10}}
+                            className="mx-1"
+                            onClick={(e, row) => {
+                              setSelectedLoan(loanData.id);
+                              toggle();
+                            }}
+                          >
+                            <FontAwesomeIcon icon={faEye} />
+                          </Button>
+  
+                        </td>
+  
+  
+                      </tr>
+  
+  
+  
+                    );
+                  }
                 })}
               </tbody>
               {selectedLoan && (
