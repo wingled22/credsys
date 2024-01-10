@@ -65,11 +65,11 @@ const Login = () => {
 
   return (
     <>
-    {user ? (
+    {/* {user ? (
         <p>Welcome, {user.id } {user.username } {user.usertype }!</p>
       ) : (
         <p>No user logged in.</p>
-      )}
+      )} */}
       <div className="login-container">
         <Card className="login-card">
           <CardBody>
@@ -103,9 +103,9 @@ const Login = () => {
             </Form>
           </CardBody>
         </Card>
-        <button onClick={()=>{
+        {/* <button onClick={()=>{
         setUser(null)
-      }}>Logout</button>
+      }}>Logout</button> */}
       </div>
       
     </>

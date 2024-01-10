@@ -19,6 +19,7 @@ import RemittanceReport from './reports/RemittanceReport.jsx';
 import UserContext from './UserContext.jsx';
 import Login from './Login.jsx';
 import ClientSide from './ClientSide.jsx';
+import ItineraryReport from './Itinerary.jsx';
 
 const AppRouter = () => {
     const [user, setUser] = useState(null);
@@ -30,7 +31,7 @@ const AppRouter = () => {
             <Routes>
                 <Route path="/" element={<Login />} />
                 <Route path="/admin" element={<App />}>
-                    <Route path='/admin/dash' index element={<Dash />} />
+                    <Route path='/admin/dash' element={<Dash />} />
                     <Route path="/admin/clients" element={<Clients />} />
                     <Route path="/admin/payment" element={<Payment />} />
                     <Route path="/admin/payment/clientloans/:clientId" element={<ClientLoans />} />
@@ -42,12 +43,13 @@ const AppRouter = () => {
                     <Route path="/admin/reports/cbu" element={<ReportCBU />} />
                     <Route path="/admin/reports/insurance" element={<ReportInsurance />} />
                     <Route path="/admin/reports/delinquent" element={<DelinquentReport />} />
+                    <Route path="/admin/reports/ItineraryReport" element={<ItineraryReport />} />
                     <Route path="/admin/reports/remittance" element={<RemittanceReport />} />
                     <Route path="/admin/reports/promisory/:loanId" element={<ReportPromisory />} />
                     <Route path="/admin/reports/reciept/:transId" element={<Reciept />} />
                 </Route>
 
-                <Route path='/client' element={<ClientSide/>}/> 
+                <Route path='/clients' element={<ClientSide/>}/> 
 
                     
             </Routes>

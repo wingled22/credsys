@@ -89,7 +89,7 @@ const Reports = () => {
                     </Card>
                 </Link>
 
-                <Link>
+                <Link to={'/admin/reports/ItineraryReport'}>
                     <Card
                         style={{
                             width: '15rem',
