@@ -21,6 +21,7 @@ import Login from './Login.jsx';
 import ClientSide from './ClientSide.jsx';
 import ItineraryReport from './Itinerary.jsx';
 import ClientTransactions from './ClientTransaction.jsx';
+import TransactionReport from './reports/TransactionReport.jsx';
 
 const AppRouter = () => {
     const [user, setUser] = useState(null);
@@ -44,6 +45,7 @@ const AppRouter = () => {
                     <Route path="/admin/reports/cbu" element={<ReportCBU />} />
                     <Route path="/admin/reports/insurance" element={<ReportInsurance />} />
                     <Route path="/admin/reports/delinquent" element={<DelinquentReport />} />
+                    <Route path="/admin/reports/transaction" element={<TransactionReport />} />
                     <Route path="/admin/reports/ItineraryReport" element={<ItineraryReport />} />
                     <Route path="/admin/reports/remittance" element={<RemittanceReport />} />
                     <Route path="/admin/reports/promisory/:loanId" element={<ReportPromisory />} />

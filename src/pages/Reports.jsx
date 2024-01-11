@@ -136,7 +136,7 @@ const Reports = () => {
                     </Card>
                 </Link>
 
-                <Link to={"/admin/reports/delinquent"} style={{ textDecoration: "none" }} >
+                <Link to={"/admin/reports/transaction"} style={{ textDecoration: "none" }} >
                     <Card
                         style={{
                             width: '15rem',
