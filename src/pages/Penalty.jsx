@@ -46,7 +46,7 @@ const Penalty = () => {
             }}>
                 <h3>Past-Due Loans</h3>
 
-                <Link to="/penalized" className=''>
+                <Link to="/admin/penalized" className=''>
                     <Button 
                         color='warning'
                         style={{}}
