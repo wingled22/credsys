@@ -136,7 +136,7 @@ function Dash() {
               <center>
                 <h3>
                   <strong>
-                    {getTodayTotal()}
+                    {getTodayTotal().toFixed(2)}
                   </strong>
                 </h3>
               </center>

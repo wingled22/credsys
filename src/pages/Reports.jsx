@@ -82,7 +82,7 @@ const Reports = () => {
                             </CardTitle>
 
                             <CardText>
-                                Balance the collection from the bills collected
+                                Liquidate the collection from the bills collected
                             </CardText>
 
                         </CardBody>
