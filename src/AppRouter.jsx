@@ -31,8 +31,8 @@ const AppRouter = () => {
         <UserContext.Provider value={value}>
             <Routes>
                 <Route path="/" element={<Login />} />
-                <Route path="/admin" element={<App />}>
-                    <Route path='/admin/dash' element={<Dash />} />
+                <Route path="/admin" exact element={<App />}>
+                    <Route  index  element={<Dash />} />
                     <Route path="/admin/clients" element={<Clients />} />
                     <Route path="/admin/payment" element={<Payment />} />
                     <Route path="/admin/payment/clientloans/:clientId" element={<ClientLoans />} />

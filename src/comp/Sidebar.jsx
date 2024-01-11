@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { Outlet, Link, NavLink, Navigate } from "react-router-dom";
+import { Outlet, Link, NavLink, Navigate, useMatch } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUser, faCog, faSignOutAlt, faMoneyBill, faFileInvoice, faMoneyBill1, faMoneyBill1Wave, faCashRegister, faUsers, faWarning } from '@fortawesome/free-solid-svg-icons';
 
@@ -14,6 +14,22 @@ export default function Sidebar() {
         return <Navigate to="/" />;
     }
 
+    const isActive = (path) => {
+        return window.location.pathname === path || window.location.pathname.startsWith(path);
+    };
+
+    const CustomNavLink = ({ to, children, icon }) => {
+        const match = useMatch(to);
+      
+        return (
+          <Link className={`nav-item ${match ? 'active' : ''}`} to={to}>
+            <FontAwesomeIcon icon={icon} size="lg" />
+            {children}
+          </Link>
+        );
+      };
+
+
     return <>
         <div className="sidebar">
             <div className="logo-container">
@@ -22,23 +38,21 @@ export default function Sidebar() {
                 </div>
             </div>
             <div className="nav-container">
-                <NavLink className="nav-item" to={"/admin/dash"} activeclassname="active">
-                    <FontAwesomeIcon icon={faHome} size="lg" />
-                </NavLink>
+                <CustomNavLink to="/admin" icon={faHome}/>
 
-                <NavLink className="nav-item" to={"/admin/clients"} activeclassname="active">
+                <NavLink className="nav-item" to={"/admin/clients"} activeClassName="active" isActive={() => isActive('/admin/clients')}>
                     <FontAwesomeIcon icon={faUsers} size="lg" />
                 </NavLink>
 
-                <NavLink className="nav-item" to={"/admin/payment"} activeclassname="active">
+                <NavLink className="nav-item" to={"/admin/payment"} activeClassName="active">
                     <FontAwesomeIcon icon={faCashRegister} size="lg" />
                 </NavLink>
 
-                <NavLink className="nav-item" to={"/admin/penalty"} activeclassname="active">
+                <NavLink className="nav-item" to={"/admin/penalty"} activeClassName="active">
                     <FontAwesomeIcon icon={faWarning} size="lg" />
                 </NavLink>
 
-                <NavLink className="nav-item" to={"/admin/reports"} activeclassname="active">
+                <NavLink className="nav-item" to={"/admin/reports"} activeClassName="active">
                     <FontAwesomeIcon icon={faFileInvoice} size="lg" />
                 </NavLink>
 
