@@ -74,7 +74,7 @@ const Penalized = () => {
                                     <td>{`${months[new Date(rowData.dueDate).getMonth()]} ${new Date(rowData.dueDate).getDate()}, ${new Date(rowData.dueDate).getFullYear()}`}</td>
                                     <td>{(rowData.loanAmount - rowData.collected) + rowData.totalPenalty}</td>
                                     <td>
-                                        <Link to={`/penalized/paymentregister/${rowData.clientId}/${rowData.id}`}>
+                                        <Link to={`/admin/penalized/paymentregister/${rowData.clientId}/${rowData.id}`}>
                                             <Button
                                                 color='warning'
                                                 size='sm'
