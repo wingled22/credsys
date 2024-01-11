@@ -18,7 +18,7 @@ const Reports = () => {
             <h5>Reports</h5>
 
             <div className="overflow-auto client-table-container d-flex flex-wrap justify-content-around" style={{ margin: 20, height: "90%" }}  >
-                <Link to={'/reports/cbu'} style={{ textDecoration: "none" }}>
+                <Link to={'/admin/reports/cbu'} style={{ textDecoration: "none" }}>
                     <Card
                         style={{
                             width: '15rem',
@@ -41,7 +41,7 @@ const Reports = () => {
                         </CardBody>
                     </Card>
                 </Link>
-                <Link to={'/reports/insurance'} style={{ textDecoration: "none" }}>
+                <Link to={'/admin/reports/insurance'} style={{ textDecoration: "none" }}>
                     <Card
                         style={{
                             width: '15rem',
@@ -65,7 +65,7 @@ const Reports = () => {
                     </Card>
                 </Link>
 
-                <Link to={'/reports/remittance'} style={{ textDecoration: "none" }}>
+                <Link to={'/admin/reports/remittance'} style={{ textDecoration: "none" }}>
                     <Card
                         style={{
                             width: '15rem',
@@ -112,7 +112,7 @@ const Reports = () => {
                         </CardBody>
                     </Card>
                 </Link>
-                <Link to={"/reports/delinquent"} style={{ textDecoration: "none" }} >
+                <Link to={"/admin/reports/delinquent"} style={{ textDecoration: "none" }} >
                     <Card
                         style={{
                             width: '15rem',
@@ -136,7 +136,7 @@ const Reports = () => {
                     </Card>
                 </Link>
 
-                <Link to={"/reports/delinquent"} style={{ textDecoration: "none" }} >
+                <Link to={"/admin/reports/delinquent"} style={{ textDecoration: "none" }} >
                     <Card
                         style={{
                             width: '15rem',

@@ -16,7 +16,7 @@ const ClientTransactions = () => {
 
     const getTrans = async () => {
         try {
-            const response = await fetch(`http://localhost:5034/api/Transaction/3`);
+            const response = await fetch(`http://localhost:5034/api/Transaction/${user.clientId}`);
             const data = await response.json();
 
             setTrans(data);
@@ -45,6 +45,7 @@ const ClientTransactions = () => {
                 {loading ? (
                     <h4>Loading transactions</h4>
                 ) : (
+                    
                     <div>
                         <h2>Loan Details</h2>
                         <Table striped bordered>
@@ -66,31 +67,7 @@ const ClientTransactions = () => {
                             </tbody>
                         </Table>
 
-                        {trans.map((loan) => (
-                            <div key={loan.id}>
-                                <h2>Transaction Details for Loan ID {loan.id}</h2>
-                                <Table striped bordered>
-                                    <thead>
-                                        <tr>
-                                            <th>Transaction ID</th>
-                                            <th>Amount</th>
-                                            <th>Payment Date</th>
-                                            {/* Add more columns as needed */}
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {loan.transactions.map((transaction) => (
-                                            <tr key={transaction.transId}>
-                                                <td>{transaction.transId}</td>
-                                                <td>{transaction.amount}</td>
-                                                <td>{transaction.paymentDate}</td>
-                                                {/* Add more cells as needed */}
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </Table>
-                            </div>
-                        ))}
+                      
                     </div>
                 )}
             </Col>
