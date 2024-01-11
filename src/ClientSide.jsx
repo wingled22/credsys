@@ -18,9 +18,9 @@ const ClientSide = () => {
         <>
             <Navbar style={{background:"#aad7e2"}} expand="md">
                 <Nav className="mx-auto" navbar>
-                    <NavLink href="/" className="mx-3">
+                    {/* <NavLink href="/" className="mx-3">
                         <Button style={{background:"#eda652"}}> Home</Button>
-                    </NavLink>
+                    </NavLink> */}
                     <NavLink to="/clients/transactions" className="mx-3">
                         <Button style={{background:"#eda652"}}> Transaction</Button>
                     </NavLink>
